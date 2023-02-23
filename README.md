@@ -20,6 +20,6 @@ Ms. Zelan Eroz Espanto has a large amount of clothing items, varying from differ
 
 ## Record of Tasks
 | Task No | Planned Action| Planned Outcome| Time estimate | Target completion date | Criterion |
-|-|-|-|-|-|-|
+|-|--------|--------|---|---|-|
 |1|Meet with the client|Discuss Problem definition| 5 min| 16 Feb 23| Criteria A|
 |2|Meet with client| Finalize success criteria| 5 min | 16 Feb 23| Criteria A|
