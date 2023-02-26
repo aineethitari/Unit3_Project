@@ -23,6 +23,5 @@ Ms. Zelan Eroz Espanto has a large amount of clothing items, varying from differ
 |-|--------|--------|---|---|-|
 |1|Meet with the client|Discuss Problem definition| 5 min| 16 Feb 23| Criteria A|
 |2|Meet with client| Finalize success criteria| 5 min | 16 Feb 23| Criteria A|
-|3| Finish login system| Login system with password stored as a hash and nice simple visuals| 30 min| 26 Feb 23 | 
-Criteria C|
+|3| Finish login system| Login system with password stored as a hash and nice simple visuals| 30 min| 26 Feb 23 |Criteria C|
 |4| Create a Welcome Screen| Welcome Screen with nice visuals| 5 min| 26 Feb 23| Criteria C
