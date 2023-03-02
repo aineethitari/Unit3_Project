@@ -24,4 +24,8 @@ Ms. Zelan Eroz Espanto has a large amount of clothing items, varying from differ
 |1|Meet with the client|Discuss Problem definition| 5 min| 16 Feb 23| Criteria A|
 |2|Meet with client| Finalize success criteria| 5 min | 16 Feb 23| Criteria A|
 |3| Finish login system| Login system with password stored as a hash and nice simple visuals| 30 min| 26 Feb 23 |Criteria C|
-|4| Create a Welcome Screen| Welcome Screen with nice visuals| 5 min| 26 Feb 23| Criteria C
+|4| Create a Welcome Screen| Welcome Screen with nice visuals| 5 min| 26 Feb 23| Criteria C|
+|5| Create a Home Screen| Homescreen with buttons that can go to other screens | 1 hr | 26 Feb 23 | Criteria C|
+|6| Create a Add Item Screen| Screen with text boxes to add information| 27 Feb 23| Criteria C|
+|7| Connect add item screen to database| Screen can add information filled to the database | 2 March 23| Criteria C|
+|8| Create Seek closet screen| Screen with items that allow users to edit items in the closet and look at what is in the closet by categories| 2 March 23| Criteria C|
