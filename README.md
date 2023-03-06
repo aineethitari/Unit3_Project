@@ -2,9 +2,24 @@
 
 ![wardrobe](https://user-images.githubusercontent.com/112055062/217793401-65c8d5ba-5443-415b-b1d9-6c0537ab58ac.jpeg)
 
-# Criteria A : Planning
+# Table of Content
+1. [Criteria A](#criteria-a-planning)
+
+2. [Criteria B](#criteria-b-solution-overview)
+
+3. [Criteria C](#criteria-c-development)
+
+4. [Criteria D](#criteria-d-functionality)
+
+5. [Citation](#citation)
+
+6. [Appendix](#appendix)
+
+6.1  [Meeting Note](#client-meeting-note)
+
+# Criteria A-Planning
 ## Problem Definition
-Ms. Zelan Eroz Espanto has a large amount of clothing items, varying from different kinds of jewelries, tops, bottoms, to shoes. She often has trouble with how she can manage and keep track of where her clothing items go. After she stores one item in her wardrobe, they would disappear. One incident was when her father gave her jewelry that was passed on generations by generations, she lost the valuable family heirloom in her messy wardrobe. She felt extremely guilty and miserable that the tradition ended because of her. Since then, she decided to become a more organized person by using a tracker. She is in need of an application that will keep track of the items in her wardrobe that has the functions to let her add and remove items, organize by color, classify the items in categories, and is easy to go through.
+My client has a large amount of clothing items, varying from different kinds of jewelries, tops, bottoms, to shoes. She often has trouble with how she can manage and keep track of where her clothing items go. After she stores one item in her wardrobe, they would disappear. One incident was when her father gave her jewelry that was passed on generations by generations, she lost the valuable family heirloom in her messy wardrobe. She felt extremely guilty and miserable that the tradition ended because of her. Since then, she decided to become a more organized person by using a tracker. She is in need of an application that will keep track of the items in her wardrobe that has the functions to let her add and remove items, organize by color, classify the items in categories, and is easy to go through.
 
 ## Rationale for Proposed Solution
 
@@ -16,7 +31,7 @@ Ms. Zelan Eroz Espanto has a large amount of clothing items, varying from differ
 5. The application allows the user to add and remove items
 6. The application has a simple interface 
 
-# Criteria B : Solution Overview
+# Criteria B-Solution overview
 
 ## Record of Tasks
 | Task No | Planned Action| Planned Outcome| Time estimate | Target completion date | Criterion |
@@ -29,3 +44,7 @@ Ms. Zelan Eroz Espanto has a large amount of clothing items, varying from differ
 |6| Create a Add Item Screen| Screen with text boxes to add information| 27 Feb 23| Criteria C|
 |7| Connect add item screen to database| Screen can add information filled to the database | 2 March 23| Criteria C|
 |8| Create Seek closet screen| Screen with items that allow users to edit items in the closet and look at what is in the closet by categories| 2 March 23| Criteria C|
+
+# Criteria C-Development
+
+# Criteria D-Functionality
