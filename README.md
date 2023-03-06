@@ -13,9 +13,7 @@
 
 5. [Citation](#citation)
 
-6. [Appendix](#appendix)
-
-6.1  [Meeting Note](#client-meeting-note)
+6. [Code](#code)
 
 # Criteria A-Planning
 ## Problem Definition
@@ -48,3 +46,4 @@ My client has a large amount of clothing items, varying from different kinds of 
 # Criteria C-Development
 
 # Criteria D-Functionality
+# Citation
