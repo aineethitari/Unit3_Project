@@ -66,6 +66,13 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 
 **Figure 5** The flow diagram above shows how the registration method works. According to the diagram, the programs get information of the user, email, password, and password confirmation from the user input in the application. Then it checks whether the email is an actual email address by checking if there “@” is in the email. If it is not an email, the program shows an error message for the email. Then the program checks whether the password entered and the confirmation password is the same and whether the password has more than 7 characters. If it does not fit the requirement, the program will show an error message. If the email and password entered fits the requirements, the program will connect to the database “login_database.db”, convert the entered password into a hash, and insert the hash, password, email, and user to the table “users”. The program will then proceed on to the next page which is the “LoginScreen”
 
+## Flow Diagram for the Save Item Method
+
+![save item flow diagram](https://user-images.githubusercontent.com/112055062/223440785-4960f3ba-f2dd-4871-813b-7e7c0c7478d5.jpeg)
+
+**Figure 6** The flow diagram above shows how the method that saves an item to the closet works. The method starts with storing the user input of the item name, category, color, location, and brand into variables. Then if the input is an empty string, which means no input is added to the program, a pop up screen will show a message asking the user to fill in the information. If the information is filled out correctly, the program will connect to the database and insert the information entered by the user to the table “closet” and show a confirmation pop up screen. 
+
+## Flow Diagram for 
 
 
 
@@ -93,7 +100,9 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |19| Create UML Diagram| Diagram that shows the classes in the program, the attributes in it, and the methods| 30 min| 7 March| Criteria B|
 |20| Write about UML Diagram| Detailed description of the UML Diagram| 15 min| 7 March| Criteria B|
 |21| Create Flow Diagram for registration method| Flow diagram that is simple for the client to understand how the method works| 30 min| 7 March| Criteria B|
-|22| Write about Flow Diagram| Detailed description of the flow diagram| 15 min| 7 March| Criteria B|
+|22| Write about Flow Diagram for registration method| Detailed description of the flow diagram| 15 min| 7 March| Criteria B|
+|23| Created the flow diagram for the adding new item method| The flow diagram shows how new item is added to the database through the application | 15 min| 7 March 23| Criteria B|
+|24| Write about the flow diagram for adding new item| Detailed description of the flow diagram to establish a common understanding| 15 min| 7 March 23| Criteria B|
 
 # Criteria C-Development
 
