@@ -64,6 +64,9 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 
 ![Registration Flow Diagram](https://user-images.githubusercontent.com/112055062/223423319-d5db7b3e-5720-465b-a48b-dd7e3838d409.jpeg)
 
+**Figure 5** The flow diagram above shows how the registration method works. According to the diagram, the programs get information of the user, email, password, and password confirmation from the user input in the application. Then it checks whether the email is an actual email address by checking if there “@” is in the email. If it is not an email, the program shows an error message for the email. Then the program checks whether the password entered and the confirmation password is the same and whether the password has more than 7 characters. If it does not fit the requirement, the program will show an error message. If the email and password entered fits the requirements, the program will connect to the database “login_database.db”, convert the entered password into a hash, and insert the hash, password, email, and user to the table “users”. The program will then proceed on to the next page which is the “LoginScreen”
+
+
 
 
 ## Record of Tasks
@@ -89,6 +92,8 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |18| Write about the ER Diagram| Detailed description of the relationships in the diagram| 15 min| 7 March| Criteria B|
 |19| Create UML Diagram| Diagram that shows the classes in the program, the attributes in it, and the methods| 30 min| 7 March| Criteria B|
 |20| Write about UML Diagram| Detailed description of the UML Diagram| 15 min| 7 March| Criteria B|
+|21| Create Flow Diagram for registration method| Flow diagram that is simple for the client to understand how the method works| 30 min| 7 March| Criteria B|
+
 
 # Criteria C-Development
 
