@@ -72,7 +72,11 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 
 **Figure 6** The flow diagram above shows how the method that saves an item to the closet works. The method starts with storing the user input of the item name, category, color, location, and brand into variables. Then if the input is an empty string, which means no input is added to the program, a pop up screen will show a message asking the user to fill in the information. If the information is filled out correctly, the program will connect to the database and insert the information entered by the user to the table “closet” and show a confirmation pop up screen. 
 
-## Flow Diagram for 
+## Flow Diagram for Delete Item Method
+
+![delete item method](https://user-images.githubusercontent.com/112055062/223451458-35ecb917-10e3-4c85-8872-c0558b0b9103.jpeg)
+
+**Figure 6** The flow diagram shows how the delete method works. This method is used to delete items from the closet database table. The method includes storing the rows that are checked from the table in the application in a variable called “checks”. Then for every item in checks, the first item is then stored in a variable called “id”. The first item is the id of the item that is added to the closet. Then the program is connected to the database “login_database.db”. The program then deletes the row with the same id as the checked row from the database. The checked item will then be erased.
 
 
 
