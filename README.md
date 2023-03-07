@@ -38,11 +38,17 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 
 # Criteria B-Solution overview
 
+## System Diagram of the Program
+
 ![IMG_7435](https://user-images.githubusercontent.com/112055062/223325525-a3d7705e-0299-4ebe-a2ee-2051bb63f52e.JPG)
 **Figure1** This shows the system diagram of the program which consists of the input which is from the keyboard and the trackpad into the computer which is an Apple MacBook Pro 2020 with macOSMonerey 12.6. In the computer, the programming language that is used is Python 3.11 and a KivyMD library is used to develop the application. Python is connected to the SQLite database. Lastly the output, which is the app interface, is connected to the Python program.
 
+## Wireframe Diagram of the GUI
+
 ![IMG_7437](https://user-images.githubusercontent.com/112055062/223385609-b9dac2d8-8039-4a95-9ccf-db119df72c8f.JPG)
 **Figure2** This is the wireframe diagram for the GUI. The diagram shows the functions of each button on where it will direct the users to. The six screens in the applications are the welcome screen, login screen, registration screen, home screen, seek closet screen, and add item screen. As shown in the diagram above, the welcome screen is the first screen that the user will encounter when entering the application. There will be an “Explore Closet” button, which allows the user to proceed to the login screen. If the user does not have an account, they will have to start a new registration in the registration screen by clicking the “Registration” button. If they have an account they can enter their information and proceed to the home screen. In the registration screen, the user will be asked to fill in their information. Once they have filled out the blanks, they can press the “Signup” button. This button will take them back to the login screen before entering the Home screen. There are three main buttons in the home screen: seek closet, add item, and logout. The seek closet button will take the user to the Seek closet screen, which shows a table of the closet. The user can press the “Back” button to go back to the Home screen. In the Home screen, the “Add item” button takes the user to the “Add Item Screen”. This screen allows the user to fill in the information about new items to add into the closet. There is a “Back”  button which takes the user back to the Home screen. Lastly, in the home screen, the user can press the “Logout” button to head back to the login page. 
+
+## ER Diagram of the Database 
 
 ![Blank diagram](https://user-images.githubusercontent.com/112055062/223399486-d1e9fed4-d347-4e78-8d26-1eeeceb73a98.jpeg)
 
