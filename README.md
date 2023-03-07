@@ -107,6 +107,8 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |22| Write about Flow Diagram for registration method| Detailed description of the flow diagram| 15 min| 7 March| Criteria B|
 |23| Created the flow diagram for the adding new item method| The flow diagram shows how new item is added to the database through the application | 15 min| 7 March 23| Criteria B|
 |24| Write about the flow diagram for adding new item| Detailed description of the flow diagram to establish a common understanding| 15 min| 7 March 23| Criteria B|
+|25| Create flow diagram for delete item method| The flow diagram shows how the function for deleting item that is checked works| 30 min| 7 March 23| Criteria B|
+|26| Write about the flow diagram for deleting item| Detailed description of how the flow diagram work so the client understands the method| 15 min| 7 March 23| Criteria B|
 
 # Criteria C-Development
 
