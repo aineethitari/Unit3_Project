@@ -93,7 +93,7 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |19| Create UML Diagram| Diagram that shows the classes in the program, the attributes in it, and the methods| 30 min| 7 March| Criteria B|
 |20| Write about UML Diagram| Detailed description of the UML Diagram| 15 min| 7 March| Criteria B|
 |21| Create Flow Diagram for registration method| Flow diagram that is simple for the client to understand how the method works| 30 min| 7 March| Criteria B|
-
+|22| Write about Flow Diagram| Detailed description of the flow diagram| 15 min| 7 March| Criteria B|
 
 # Criteria C-Development
 
