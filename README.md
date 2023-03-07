@@ -54,11 +54,15 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 
 **Figure 3** This is the ER Diagram for the database "login_database.db", which contains two tables: users and closet. The ER diagram above shows the relationship between these two tables that per one user there can be numerous closets. There are 4 columns in the users table: email, id (user id), password, and username. The information in these columns are collected from when the users login to the application. The closet table, on the other hand, is used to store the items that the users want to add to their closet. One user can enter as many items to the closet as they want. There are 7 columns in the table: id(item id), brand, location, user_id, item, color, and category.
 
-# UML Diagram of the Program
+## UML Diagram of the Program
 
 ![UML diagram](https://user-images.githubusercontent.com/112055062/223410991-fef4324b-ef87-4deb-bb2c-69b9f5c03c30.jpeg)
 
 **Figure 4** This is the UML Diagram of the classes used in this project with the details of the attributes and the methods within each class. The classes are MDApp, database_worker, MDScreen, and other classes that inherit from the MDApp and the MDScreen class. The inheritance class from MDApp is the example_login(MDApp) class, which is the class that builds the application. The inheritance class from the MDScreen class are the screens in the program: WelcomeScreen(MDScreen), LoginScreen(MDScreen), RegistrationScreen(MDScreen), HomeScreen(MDScreen), NewItemScreen(MDScreen), ClosetScreen(MDScreen). Lastly, the class database_worker is used to set up the database with methods that involve creating the tables and editing them.
+
+## Flow Diagram for the Registration Method
+
+![Registration Flow Diagram](https://user-images.githubusercontent.com/112055062/223423319-d5db7b3e-5720-465b-a48b-dd7e3838d409.jpeg)
 
 
 
