@@ -58,7 +58,9 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 
 ![UML diagram](https://user-images.githubusercontent.com/112055062/223410991-fef4324b-ef87-4deb-bb2c-69b9f5c03c30.jpeg)
 
-**Figure 4** This is the 
+**Figure 4** This is the UML Diagram of the classes used in this project with the details of the attributes and the methods within each class. The classes are MDApp, database_worker, MDScreen, and other classes that inherit from the MDApp and the MDScreen class. The inheritance class from MDApp is the example_login(MDApp) class, which is the class that builds the application. The inheritance class from the MDScreen class are the screens in the program: WelcomeScreen(MDScreen), LoginScreen(MDScreen), RegistrationScreen(MDScreen), HomeScreen(MDScreen), NewItemScreen(MDScreen), ClosetScreen(MDScreen). Lastly, the class database_worker is used to set up the database with methods that involve creating the tables and editing them.
+
+
 
 ## Record of Tasks
 | Task No | Planned Action| Planned Outcome| Time estimate | Target completion date | Criterion |
@@ -81,7 +83,8 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |16| Write a description about the wireframe diagram| Explain to the client in detailed on how the diagram works, and guide them through every screen| 15 min| 7 March 2023| Criteria B|
 |17| Create ER Diagram| Diagram that shows the relationship between the tables in the database| 30 min| 7 March| Criteria B|
 |18| Write about the ER Diagram| Detailed description of the relationships in the diagram| 15 min| 7 March| Criteria B|
-
+|19| Create UML Diagram| Diagram that shows the classes in the program, the attributes in it, and the methods| 30 min| 7 March| Criteria B|
+|20| Write about UML Diagram| Detailed description of the UML Diagram| 15 min| 7 March| Criteria B|
 
 # Criteria C-Development
 
