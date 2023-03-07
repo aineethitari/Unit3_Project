@@ -1,6 +1,7 @@
 # Unit3_Project
 
 ![closet future](https://user-images.githubusercontent.com/112055062/223308489-a5827965-ff1a-422a-a6d6-d0ba33132330.png)
+
 **Figure 1** AI generated closet art [1]
 
 # Table of Content
