@@ -81,7 +81,14 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 ## Test Plan
 |Description| Type| Inputs| Outputs|
 |-----------------------|----------|----------------------------------------|-----------------------------------|
-|Test the register system| Unit test|1. Enter username, email, password, password check 2.Press the signup button|Information is successfully added to the database and the screen proceeds to the login page||
+|Test the registration system| Unit test|1. Enter username, email, password, password check 2.Press the signup button|Information is successfully added to the database and the screen proceeds to the login page|
+|Test the email validation in registration| Unit test| 1.Enter every blank field correctly, but enter a random string that is not an email in the email field 2.Press signup|The program returns an error in the email field|
+| Test the password length validation| Unit test| 1.Enter every blank field correctly, but enter the same password with characters less than 7 in the two password fields. 2.Press signup| The program returns a red error message in the field|
+| Test the password confirmation| Unit test| 1.Enter every blank field correctly, but enter different passwords in the two password field 2.Press signup| The program returns a red error message in the field|
+| Test the login system|Unit test|1. Enter a registered email 2.Enter a registered password 3.Press Login button| The program proceeds to the next screen|
+|Test the login system 2| Unit test|1.Enter a wrong email 2.Enter a password 3.Press login| The program shows error in the two text fields|
+|Test the login system 3| Unit test| 1.Enter a correct registered email 2.Enter a wrong password 3.Press login| The program shows error only in the password field|
+|
 
 ## Record of Tasks
 | Task No | Planned Action| Planned Outcome| Time estimate | Target completion date | Criterion |
@@ -112,6 +119,8 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |24| Write about the flow diagram for adding new item| Detailed description of the flow diagram to establish a common understanding| 15 min| 7 March 23| Criteria B|
 |25| Create flow diagram for delete item method| The flow diagram shows how the function for deleting item that is checked works| 30 min| 7 March 23| Criteria B|
 |26| Write about the flow diagram for deleting item| Detailed description of how the flow diagram work so the client understands the method| 15 min| 7 March 23| Criteria B|
+|27| Create the test plan table| test plan table with the following columns: description, type, inputs, and outputs| 5 min| 7 March 2023| Criteria B|
+
 
 # Criteria C-Development
 
