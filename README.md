@@ -78,7 +78,10 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 
 **Figure 6** The flow diagram shows how the delete method works. This method is used to delete items from the closet database table. The method includes storing the rows that are checked from the table in the application in a variable called “checks”. Then for every item in checks, the first item is then stored in a variable called “id”. The first item is the id of the item that is added to the closet. Then the program is connected to the database “login_database.db”. The program then deletes the row with the same id as the checked row from the database. The checked item will then be erased.
 
-
+## Test Plan
+|Description| Type| Inputs| Outputs|
+|-----------------------|----------|----------------------------------------|-----------------------------------|
+|Test the register system| Unit test|1. Enter username, email, password, password check 2.Press the signup button|Information is successfully added to the database and the screen proceeds to the login page||
 
 ## Record of Tasks
 | Task No | Planned Action| Planned Outcome| Time estimate | Target completion date | Criterion |
