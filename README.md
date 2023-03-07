@@ -74,6 +74,8 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |14| Write about the system diagram| Detailed explanation of the elements of the system and how the application functions| 15 min| 7 March| Criteria B|
 |15| Create a wireframe diagram| Visual diagram that shows the different screens of the application and the buttons that directs it to each screen| 1 hr| 7 March| Criteria B|
 |16| Write a description about the wireframe diagram| Explain to the client in detailed on how the diagram works, and guide them through every screen| 15 min| 7 March 2023| Criteria B|
+|17| Create ER Diagram| Diagram that shows the relationship between the tables in the database| 30 min| 7 March| Criteria B|
+|18| Write about the ER Diagram| Detailed description of the relationships in the diagram| 15 min| 7 March| Criteria B|
 
 
 # Criteria C-Development
