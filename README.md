@@ -1,8 +1,6 @@
 # Unit3_Project
 
-![closet future](https://user-images.githubusercontent.com/112055062/223308489-a5827965-ff1a-422a-a6d6-d0ba33132330.png)
-
-**Figure 1** AI generated closet art [1]
+![wardrobe](https://user-images.githubusercontent.com/112055062/223326409-ed67c022-db8c-4191-ad36-ec11d4573598.jpeg)
 
 # Table of Content
 1. [Criteria A](#criteria-a-planning)
@@ -41,7 +39,12 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 # Criteria B-Solution overview
 
 ![IMG_7435](https://user-images.githubusercontent.com/112055062/223325525-a3d7705e-0299-4ebe-a2ee-2051bb63f52e.JPG)
-**Figure2** This shows the system diagram of the program which consists of the input which is from the keyboard and the trackpad into the computer which is an Apple MacBook Pro 2020 with macOSMonerey 12.6. In the computer, the programming language that is used is Python 3.11 and a KivyMD library is used to develop the application. Python is connected to the SQLite database. Lastly the output, which is the app interface, is connected to the Python program.
+**Figure1** This shows the system diagram of the program which consists of the input which is from the keyboard and the trackpad into the computer which is an Apple MacBook Pro 2020 with macOSMonerey 12.6. In the computer, the programming language that is used is Python 3.11 and a KivyMD library is used to develop the application. Python is connected to the SQLite database. Lastly the output, which is the app interface, is connected to the Python program.
+
+![IMG_7437](https://user-images.githubusercontent.com/112055062/223385609-b9dac2d8-8039-4a95-9ccf-db119df72c8f.JPG)
+**Figure2** This is the wireframe diagram for the GUI. The diagram shows the functions of each button on where it will direct the users to. The six screens in the applications are the welcome screen, login screen, registration screen, home screen, seek closet screen, and add item screen. As shown in the diagram above, the welcome screen is the first screen that the user will encounter when entering the application. There will be an “Explore Closet” button, which allows the user to proceed to the login screen. If the user does not have an account, they will have to start a new registration in the registration screen by clicking the “Registration” button. If they have an account they can enter their information and proceed to the home screen. In the registration screen, the user will be asked to fill in their information. Once they have filled out the blanks, they can press the “Signup” button. This button will take them back to the login screen before entering the Home screen. There are three main buttons in the home screen: seek closet, add item, and logout. The seek closet button will take the user to the Seek closet screen, which shows a table of the closet. The user can press the “Back” button to go back to the Home screen. In the Home screen, the “Add item” button takes the user to the “Add Item Screen”. This screen allows the user to fill in the information about new items to add into the closet. There is a “Back”  button which takes the user back to the Home screen. Lastly, in the home screen, the user can press the “Logout” button to head back to the login page. 
+
+
 
 
 
@@ -61,14 +64,15 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |11| Write the rationale for proposed solution| Explanation of the reasons behind every decision made in developing this project| 1 hr| 7 March 23| Criteria B|
 |12| Create citation section in the repository| citation for every links that is used| 20 min|7 March 2023| Criteria B| 
 |13| Create System Diagram| System diagram that shows how the program works| 1 hr| 7 March | Criteria B|
-|14|
+|14| Write about the system diagram| Detailed explanation of the elements of the system and how the application functions| 15 min| 7 March| Criteria B|
+|15| Create a wireframe diagram| Visual diagram that shows the different screens of the application and the buttons that directs it to each screen| 1 hr| 7 March| Criteria B|
+|16| Write a description about the wireframe diagram| Explain to the client in detailed on how the diagram works, and guide them through every screen| 15 min| 7 March 2023| Criteria B|
 
 
 # Criteria C-Development
 
 # Criteria D-Functionality
 # Citation
-[1]“Ai Art Generator, AI Image Generator API.” Hotpot.ai, https://hotpot.ai/art-generator. 
 [2]
 [3] “Philosophy¶.” Kivy, https://kivy.org/doc/stable/philosophy.html#:~:text=Kivy%20is%20flexible.,adapt%20to%20new%20technologies%20quickly. 
 [4] S., Edward. “SQLite vs Mysql – What's the Difference.” Hostinger Tutorials, 21 Dec. 2022, https://www.hostinger.com/tutorials/sqlite-vs-mysql-whats-the-difference/#:~:text=Multiple%20Access%20and%20Scalability%20%E2%80%93%20SQLite%20vs%20MySQL,-SQLite%20does%20not&text=MySQL%20has%20a%20well%2Dconstructed,gets%20larger%20while%20using%20SQLite. 
