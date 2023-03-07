@@ -54,6 +54,11 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 
 **Figure 3** This is the ER Diagram for the database "login_database.db", which contains two tables: users and closet. The ER diagram above shows the relationship between these two tables that per one user there can be numerous closets. There are 4 columns in the users table: email, id (user id), password, and username. The information in these columns are collected from when the users login to the application. The closet table, on the other hand, is used to store the items that the users want to add to their closet. One user can enter as many items to the closet as they want. There are 7 columns in the table: id(item id), brand, location, user_id, item, color, and category.
 
+# UML Diagram of the Program
+
+![UML diagram](https://user-images.githubusercontent.com/112055062/223410991-fef4324b-ef87-4deb-bb2c-69b9f5c03c30.jpeg)
+
+**Figure 4** This is the 
 
 ## Record of Tasks
 | Task No | Planned Action| Planned Outcome| Time estimate | Target completion date | Criterion |
