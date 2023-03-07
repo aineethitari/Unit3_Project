@@ -39,9 +39,13 @@ My client has a large amount of clothing items, varying from different kinds of 
 |3| Finish login system| Login system with password stored as a hash and nice simple visuals| 30 min| 26 Feb 23 |Criteria C|
 |4| Create a Welcome Screen| Welcome Screen with nice visuals| 5 min| 26 Feb 23| Criteria C|
 |5| Create a Home Screen| Homescreen with buttons that can go to other screens | 1 hr | 26 Feb 23 | Criteria C|
-|6| Create a Add Item Screen| Screen with text boxes to add information| 27 Feb 23| Criteria C|
-|7| Connect add item screen to database| Screen can add information filled to the database | 2 March 23| Criteria C|
-|8| Create Seek closet screen| Screen with items that allow users to edit items in the closet and look at what is in the closet by categories| 2 March 23| Criteria C|
+|6| Create a Add Item Screen| Screen with text boxes to add information| 3 hr|27 Feb 23| Criteria C|
+|7| Connect add item screen to database| Screen can add information filled to the database | 1 hr |2 March 23| Criteria C|
+|8| Create Seek closet screen| Screen with items that allow users to edit items in the closet and look at what is in the closet by categories| 3 hr| 2 March 23| Criteria C|
+|9| Create the function of the seek closet screen |Function in python, so the user can see the items in the closet by category| 3 hr| 2 March 23| Criteria C|
+|10| Show the client the prototype| Present in front of the client and take notes of the feedback| 10 min| 3 March 23| Criteria B|
+|11| Write the rationale for proposed solution| Explanation of the reasons behind every decision made in developing this project| 1 hr| 7 March 23| Criteria B|
+
 
 # Criteria C-Development
 
