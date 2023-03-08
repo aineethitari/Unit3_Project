@@ -88,7 +88,13 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 | Test the login system|Unit test|1. Enter a registered email 2.Enter a registered password 3.Press Login button| The program proceeds to the next screen|
 |Test the login system 2| Unit test|1.Enter a wrong email 2.Enter a password 3.Press login| The program shows error in the two text fields|
 |Test the login system 3| Unit test| 1.Enter a correct registered email 2.Enter a wrong password 3.Press login| The program shows error only in the password field|
-|
+|Test the buttons and navigation in home screen| Integration Test| 1.Click the buttons in the application | After clicking the buttons, the page change to the correct page|
+|Check the Table in the Seek Closet Page| Unit Test| 1.Scroll through the table in the table 2.Click to the 2nd page 3.Click on the category filters|The items in the table in the application matches the items in the table in the databese|
+|Check the delete item system| Unit Test| 1.Click on a row 2.Click the delete button| The row is gone when the user refreshes the screen by reclicking the category filter button|
+|Check the add item system| Unit test | 1.Fill out every field in the form 2.Press the insert button | The program returns a pop up screen confirming that the item inserted. The item is also added to the new screen|
+|Check the add item system for error| Unit test| 1.Leave some fields blank 2.Press the insert button| The program returns a pop up screen asking the users to fill out the blanked fields.|
+
+
 
 ## Record of Tasks
 | Task No | Planned Action| Planned Outcome| Time estimate | Target completion date | Criterion |
@@ -120,6 +126,7 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |25| Create flow diagram for delete item method| The flow diagram shows how the function for deleting item that is checked works| 30 min| 7 March 23| Criteria B|
 |26| Write about the flow diagram for deleting item| Detailed description of how the flow diagram work so the client understands the method| 15 min| 7 March 23| Criteria B|
 |27| Create the test plan table| test plan table with the following columns: description, type, inputs, and outputs| 5 min| 7 March 2023| Criteria B|
+|28| Write the test plan| detail test plan | 15 min| 8 March 2023| Criteria B|
 
 
 # Criteria C-Development
