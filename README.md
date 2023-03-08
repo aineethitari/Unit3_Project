@@ -93,6 +93,7 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |Check the delete item system| Unit Test| 1.Click on a row 2.Click the delete button| The row is gone when the user refreshes the screen by reclicking the category filter button|
 |Check the add item system| Unit test | 1.Fill out every field in the form 2.Press the insert button | The program returns a pop up screen confirming that the item inserted. The item is also added to the new screen|
 |Check the add item system for error| Unit test| 1.Leave some fields blank 2.Press the insert button| The program returns a pop up screen asking the users to fill out the blanked fields.|
+|Python code review| Code review| 1.Check if the code is easy for other developers to continue 2.Code has comments to explain each parts that need explanation 3.Variable names matches what the code does 3.There are no unnecessary lines| Code is commented clearly with organized structure. The code is easy to follow through.|
 
 
 
@@ -127,6 +128,7 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |26| Write about the flow diagram for deleting item| Detailed description of how the flow diagram work so the client understands the method| 15 min| 7 March 23| Criteria B|
 |27| Create the test plan table| test plan table with the following columns: description, type, inputs, and outputs| 5 min| 7 March 2023| Criteria B|
 |28| Write the test plan| detail test plan | 15 min| 8 March 2023| Criteria B|
+|29| Review whole code| Code has comments, appropriate variables,...| 20 min| 8 March 2023| Criteria B|
 
 
 # Criteria C-Development
