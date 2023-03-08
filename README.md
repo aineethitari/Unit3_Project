@@ -126,6 +126,7 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 
 # Criteria D-Functionality
 # Citation
-[2]
+
 [3] “Philosophy¶.” Kivy, https://kivy.org/doc/stable/philosophy.html#:~:text=Kivy%20is%20flexible.,adapt%20to%20new%20technologies%20quickly. 
+
 [4] S., Edward. “SQLite vs Mysql – What's the Difference.” Hostinger Tutorials, 21 Dec. 2022, https://www.hostinger.com/tutorials/sqlite-vs-mysql-whats-the-difference/#:~:text=Multiple%20Access%20and%20Scalability%20%E2%80%93%20SQLite%20vs%20MySQL,-SQLite%20does%20not&text=MySQL%20has%20a%20well%2Dconstructed,gets%20larger%20while%20using%20SQLite. 
