@@ -165,7 +165,7 @@ import sqlite3 #connect to database
 ```
 **Figure 9** The code starts with setting up the libraries and classes that are used to develop this program. To create the application, the program needs an app builder which is the “MDApp” application class from the kivymd library. From the kivymd library, MDDataTable, which is used to create the table shown in the application is also imported, MDScreen is used to create different screens in the application, MDDialog is used to show a pop up screen, secure password is a library that I created for password encryption, and sqlite3 is imported to process the database.
 
-**Building the App**
+**Building the App with MDApp**
 
 ```.py
 class example_login(MDApp): #app builder
@@ -174,7 +174,7 @@ class example_login(MDApp): #app builder
 ```
 **Figure 10** This is the class for building the application which is inherited from the MDApp class from the kivymd library. The class name is the name of the kivy file “example_login”. The class includes a method called “build” which is used to build the application and connect the python file to the kivy file.
 
-**Setting up the Screens**
+**Setting up the Screens with MDScreen**
 
 <img width="308" alt="screens" src="https://user-images.githubusercontent.com/112055062/223947719-52c6fd0b-bdd2-4a2d-ac67-a30bf5d5aed6.png">
 
