@@ -152,7 +152,7 @@ In the development of this project, there are 2 main parts which are the Graphic
 ## Using KivyMD for the Graphical User Interface (GUI)
 For the development of the GUI, KivyMD Library which contains material design widgets to organize the aesthetics of the interface. In this project there are many classes from the kivymd library that are imported to develop the components of the application: MDApp, MDScreen, MDDatatable and MDDialog. There are two parts in the development of the GUI, the first part is developed in the Python file, and the second part is developed in the kivy file. The python file may also contain other methods that are used for the functionality of the application as well. 
 
-**Setting up Python file**
+## Setting up Python file
 
 ```.py
 from kivymd.app import MDApp #app builder
@@ -165,7 +165,7 @@ import sqlite3 #connect to database
 ```
 **Figure 9** The code starts with setting up the libraries and classes that are used to develop this program. To create the application, the program needs an app builder which is the “MDApp” application class from the kivymd library. From the kivymd library, MDDataTable, which is used to create the table shown in the application is also imported, MDScreen is used to create different screens in the application, MDDialog is used to show a pop up screen, secure password is a library that I created for password encryption, and sqlite3 is imported to process the database.
 
-**Building the App with MDApp**
+## Building the App with MDApp
 
 ```.py
 class example_login(MDApp): #app builder
@@ -174,13 +174,13 @@ class example_login(MDApp): #app builder
 ```
 **Figure 10** This is the class for building the application which is inherited from the MDApp class from the kivymd library. The class name is the name of the kivy file “example_login”. The class includes a method called “build” which is used to build the application and connect the python file to the kivy file.
 
-**Setting up the Screens with MDScreen**
+## Setting up the Screens with MDScreen
 
 <img width="308" alt="screens" src="https://user-images.githubusercontent.com/112055062/223947719-52c6fd0b-bdd2-4a2d-ac67-a30bf5d5aed6.png">
 
 **Figure 11** The screens in the application are developed by classes inheriting from the MDScreen class from the kivymd library. Each screen has its own class in the python file. The main screens in this application are WelcomeScreen, LoginScreen, RegistrationScreen, HomeScreen, NewItemScreen, and ClosetScreen.
 
-**Visual Data Table in the Application**
+## Visual Data Table in the Application
 
 ```.py
 class ClosetScreen(MDScreen):
@@ -210,7 +210,7 @@ class ClosetScreen(MDScreen):
 ```
 **Figure 12** The data table in this application is shown in the Seek Closet Screen which is in the class ClosetScreen inherited from the MDScreen class. The table in this class is created using a method called “on_pre_enter”, which creates the table showing the items in the closet. The settings of the table are added which are, for example, the size of the table, setting for page options, check marks, and information of the columns (id, user_id, category, color, location, and brand). This table fulfills success criteria number 4 where the application shows the brand of the item, the color, and the location of the item.
 
-**Pop up screens using MDDialog**
+## Pop up screens using MDDialog
 ```.py
 if item=="" or category=="" or color=="" or location=="" or brand =="": #if the fields are blank
    dialog = MDDialog(title="Not enough information",
@@ -219,7 +219,8 @@ if item=="" or category=="" or color=="" or location=="" or brand =="": #if the 
 ```
 **Figure 13** MDDialog is used to show a pop up screen which can have messages for the user. In the application, these pop up screens are used as a confirmation when the user entered information in text fields such as the item information form, and confirmation for inserting item to the database. Figure 13 shows the use of MDDialog when one of the fields for the information of the item is not filled. A pop up screen will show up saying not enough information and asking the user to refill the information. 
 
-**Kivy File**
+## Kivy File
+
 Apart from the python file, to develop the user interface, we also need a Kivy file which is written in the kivy language. The file is organized in layers with different elements. The file starts with listing the application screens and its layers.
 
 ```.py
@@ -246,7 +247,7 @@ ScreenManager:
 ```
 **Figure 14** shows the screens in the application which is organized in layers. Therefore, the first screen that will show in the application when the user enters the application is the “WelcomeScreen”. The other screens could be accessed by the functions that are added to the application.
 
-**Background and boxes with FitImage and MDCard**
+## Background and boxes with FitImage and MDCard
 As the last success criteria says that the application has a simple interface, the program is organized with backgrounds and layers. The aesthetics of the program comes from the background which is a picture of a gradient graphic design. This image was added with the technique called FitImage which allows the user to add a picture file. In figure 15, the image file name is called “bg.jpeg”. However, to make a simple interface, the user needs to be able to read the information on the application clearly, so we use MDCard as a white base background. MDCard is a box with round edges used to contain content, which in this case, an MDLabel text is within the card.
 
 ```.py
@@ -269,7 +270,7 @@ As the last success criteria says that the application has a simple interface, t
 ```
 **Figure 15** shows the welcome screen which has an image as a background, a card on top, and text saying “Welcome to Zelan’s Zazzy Closet” within the card.
 
-**MDLabel**
+## MDLabel
 As the name says, MDLabel is the text function of the kivy language where the developer can adjust the size of the text, the style of the text, the message of the text, and its alignment.
 ```.py
 MDLabel:
@@ -280,7 +281,7 @@ MDLabel:
 ```
 **Figure16** The MDLabel widget has the settings of a size of taking up full space in the horizontal side, and 0.05 in the vertical side. The font style “H2” means header style 2, the text message is Registration and the horizontal alignment is placed at the center.
 
-**MDRaisedButton**
+## MDRaisedButton
 To operate the application, I have used buttons to allow users to click on and navigate them to certain actions such as going to another page, or submitting information.
 
 ```.py
@@ -293,7 +294,7 @@ MDRaisedButton:
 ```
 **Figure 17** According to the figure, MDRaisedButton is used to change the screen when it is pressed. The settings of the button says that the size takes up 0.4 of the horizontal, and 0.2 of the vertical. The position is at the middle as it is .5 of center x and y. There is a text on the button saying “Explore Closet”. The color of the button is the hex color code “C903E8”. When the user presses the button, the screen will change to the LoginScreen.
 
-**Input through MDTextField**
+## Input through MDTextField
 In the application, users may need to input information to the program such as username, password, or information of the items. MDTextField widget is used as a field to receive texts from the users. 
 
 ```.py
@@ -308,7 +309,7 @@ MDTextField:
 ```
 **Figure 18** shows the text field for entering email in the registration screen.  The id of the widget is called “email”. The field will also have a text on it to inform the user on what to input by using “hint_text” as it says “enter username”. There is an email icon next to the text field by using icon_left.  The position and the size can also be adjusted with “pos_hint” and “size_hint”. When there is an error in from the user’s input, the program will also show an error message saying “Please enter an actual email” through “helper_text’.
 
-**Organizing the pages with MDBoxLayout***
+## Organizing the pages with MDBoxLayout
 To make the interface organized, I used an organizing tool called “MDBoxLayout” which is an invisible box that can contain widgets within it. The widgets will be organized based within the MDBoxLayout. 
 ```.py
 MDBoxLayout:
@@ -333,7 +334,7 @@ MDBoxLayout:
 ```
 **Figure 19** shows the code for a Box Layout that has an organizing adjustment of spacing and padding with 10 density pixels. The box contains 2 widgets which are both buttons (MDRaisedButton). The two buttons will have the spacing and padding based on the settings underneath the MDBoxLayout.
 
-**Checkbox using MDCheckbox**
+## Checkbox using MDCheckbox
 According to success criteria #3 “The application provides a visual function to see items being classified in categories: jewelry, top, bottom, shoes”. I used checkboxes to limit the user’s input in categories of the item by allowing them to choose between the 4 categories with checkboxes. 
 
 ```.py
