@@ -1,4 +1,4 @@
-# Unit3_Project
+# Unit3 Project Closet Tracker
 
 ![closet](https://user-images.githubusercontent.com/112055062/224108917-639fe8c0-c19c-424b-a105-7ec9ef1752ab.jpeg)
 
