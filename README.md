@@ -94,6 +94,8 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |Check the add item system| Unit test | 1.Fill out every field in the form 2.Press the insert button | The program returns a pop up screen confirming that the item inserted. The item is also added to the new screen|
 |Check the add item system for error| Unit test| 1.Leave some fields blank 2.Press the insert button| The program returns a pop up screen asking the users to fill out the blanked fields.|
 |Python code review| Code review| 1.Check if the code is easy for other developers to continue 2.Code has comments to explain each parts that need explanation 3.Variable names matches what the code does 3.There are no unnecessary lines| Code is commented clearly with organized structure. The code is easy to follow through.|
+|Check that item added goes to the database| Integration Test| 1.Add item correctly in the add item page 2.Check the seek item page whether the item is added or not 3.Check the table in the database| Item is added to both the database and the seek item page|
+|Asking a friend to review the code| Code Review| 1.Show them the code 2.Ask them whether they understand how it works| They are able to refer to the functions of the parts of the code by looking at the comments and variable names|
 
 **Figure 7** Test plan of the program which consists of a description of the test, the type of the test(unit test, integration test, or code review), inputs for the test, and the expected outputs for the successful test. 
 
@@ -131,6 +133,11 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |29| Add comments to the code | Commented code with explanation to every confusing points| 30 min| 8 March 2023| Criteria B|
 |30| Review whole code| Code has comments, appropriate variables,...| 20 min| 8 March 2023| Criteria B|
 |31| List all techniques used| Techniques that are used to develop this application are listed clearly| 15 min| 9 March 2023| Criteria C|
+|32| Write about the the development of the project in GUI| Explain how the interface is developed| 2 hr| 9 March 2023| Criteria C|
+|33| Write about the development of the functions| Show how the main functions are developed from the code| 2 hr | 9 March 2023| Criteria C|
+|34| Write about the development of the the database processing| Explain how the codes and query work to connect to the database using sqlite3| 1 hr| 9 March 2023|
+|35| Record video of the functionality of the application| Explain and show every section of the application| 30 min| 9 March | 2023| Criteria D|
+|36| Show the whole code| Kivy code, python code pasted| 10 min| 9 March 2023|  |
 
 **Figure 8** The table above is the record of task for the development of the project since the beginning to the very end which is the documentation process. The information in the table includes the number of the task, the planned action, the planned outcome, the time taken to complete the task, the date completed, and the criteria(Criteria A:Planning, Criteria B: Solution Overview, Criteria C: Development, and Criteria D: Functionality)
 
@@ -611,7 +618,9 @@ Link to video showing the functionality of the application and the code: https:/
 
 # Citation
 [1] “Passlib.context - Cryptcontext Hash Manager¶.” Passlib.context - CryptContext Hash Manager - Passlib v1.7.4 Documentation, https://passlib.readthedocs.io/en/stable/lib/passlib.context.html. 
+
 [2] “Welcome to KIVYMD's Documentation!#.” KivyMD 1.1.1 Documentation, https://kivymd.readthedocs.io/en/1.1.1/. 
+
 [3] “Philosophy¶.” Kivy, https://kivy.org/doc/stable/philosophy.html#:~:text=Kivy%20is%20flexible.,adapt%20to%20new%20technologies%20quickly. 
 
 [4] S., Edward. “SQLite vs Mysql – What's the Difference.” Hostinger Tutorials, 21 Dec. 2022, https://www.hostinger.com/tutorials/sqlite-vs-mysql-whats-the-difference/#:~:text=Multiple%20Access%20and%20Scalability%20%E2%80%93%20SQLite%20vs%20MySQL,-SQLite%20does%20not&text=MySQL%20has%20a%20well%2Dconstructed,gets%20larger%20while%20using%20SQLite. 
