@@ -606,8 +606,20 @@ def create_tables(self): #method to create the tables in the database
 
 
 # Criteria D-Functionality
-# Citation
 
+# Citation
+[1] “Passlib.context - Cryptcontext Hash Manager¶.” Passlib.context - CryptContext Hash Manager - Passlib v1.7.4 Documentation, https://passlib.readthedocs.io/en/stable/lib/passlib.context.html. 
+[2] “Welcome to KIVYMD's Documentation!#.” KivyMD 1.1.1 Documentation, https://kivymd.readthedocs.io/en/1.1.1/. 
 [3] “Philosophy¶.” Kivy, https://kivy.org/doc/stable/philosophy.html#:~:text=Kivy%20is%20flexible.,adapt%20to%20new%20technologies%20quickly. 
 
 [4] S., Edward. “SQLite vs Mysql – What's the Difference.” Hostinger Tutorials, 21 Dec. 2022, https://www.hostinger.com/tutorials/sqlite-vs-mysql-whats-the-difference/#:~:text=Multiple%20Access%20and%20Scalability%20%E2%80%93%20SQLite%20vs%20MySQL,-SQLite%20does%20not&text=MySQL%20has%20a%20well%2Dconstructed,gets%20larger%20while%20using%20SQLite. 
+
+[5] “Card#.” Card - KivyMD 1.1.1 Documentation, https://kivymd.readthedocs.io/en/1.1.1/components/card/index.html. 
+
+[6] “Datatables.” DataTables - KivyMD 1.1.1 Documentation, https://kivymd.readthedocs.io/en/1.1.1/components/datatables/index.html. 
+
+[7] “Screen.” Screen - KivyMD 1.1.1 Documentation, https://kivymd.readthedocs.io/en/1.1.1/components/screen/index.html. 
+
+[8] “Dialog.” Dialog - KivyMD 1.1.1 Documentation, https://kivymd.readthedocs.io/en/1.1.1/components/dialog/index.html. 
+
+[9] SQLite Documentation, https://www.sqlite.org/docs.html. 
