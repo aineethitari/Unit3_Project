@@ -392,6 +392,217 @@ MDBoxLayout:
 ```
 **Figure 20** shows the code in kivy language of the 4 checkboxes that are created to allow the users to choose the category of the item. Each checkboxes has its own id to connect with the Python file. They all fit in the same group, “group1”, so all the checkboxes are linked and only one can be selected. The “on_active” allows the checkbox to be clicked and the information will be sent to the Python code as a string.
 
+## Developing the functions through Python 
+
+### Registration System
+This is the method for registering new email and passwords to fulfill success criteria #1 where the client wants an application that has a login system that uses a hash password or a pin number. Therefore, I have created a registration system which allows the user to create a new account. 
+
+```.py
+def try_register(self): #registration method
+   user = self.ids.username.text #user text field
+   email = self.ids.email.text #email text field
+   password = self.ids.password.text #password text field
+   password_check = self.ids.password_check.text #password confirmation text field
+   if "@" not in email: #checks that there's an @ in the email so it is an actual email
+       self.ids.email.error = True #show error
+   if password != password_check or len(password) < 7: # password entered does not match and have less than 7 characters
+       self.ids.password_check.error = True #show error
+       self.ids.password.error = True
+       self.ids.password_check.md_bg_color = "red"
+   else:  # password match
+       db = database_worker("login_database.db") #connect to the database
+       hash = encypt_password(password) #turn password to hash
+       query = f"INSERT into users (email, password, username) values('{email}','{hash}','{user}')" # insert info into the table users
+       db.run_save(query)
+       db.close()
+       print("Registration completed")
+       self.parent.current = "LoginScreen" #change to login screen
+```
+
+**Figure 21** shows the Python code of the registration method where the users are asked to input a new username, email, password, and a password confirmation.
+
+### Email Policy
+
+```.py
+if "@" not in email: #checks that there's an @ in the email so it is an actual email
+   self.ids.email.error = True #show error
+```
+
+**Figure 22** There is a validation system for email to make sure that the user input an actual email address by requiring “@” to be in the input. If the “@” sign is not in the email input, the program will return an error message. 
+
+### Password Policy
+```.py
+if password != password_check or len(password) < 7: # password entered does not match and have less than 7 characters
+   self.ids.password_check.error = True #show error
+   self.ids.password.error = True
+   self.ids.password_check.md_bg_color = "red"
+```
+**Figure 23** There is a password policy that the user needs to enter a password that has at least 7 characters and the passwords input in the “password” textfield and the “password_check” textfield need to match to make sure that the user input the right password. This is done so by using an if statement where the passwords do not match and the characters does not reach 7 and the program will show an error message in the text field.
+
+```.py
+else:  # password match
+   db = database_worker("login_database.db") #connect to the database
+   hash = encypt_password(password) #turn password to hash
+   query = f"INSERT into users (email, password, username) values('{email}','{hash}','{user}')" # insert info into the table users
+   db.run_save(query)
+   db.close()
+   print("Registration completed")
+   self.parent.current = "LoginScreen" #change to login screen
+```
+**Figure24** This shows what happens if the password entered passes the password policy. The program will connect to the database and transform the password into a hash with the function “encrypt_password” (see Figure 25). The user registration information is then inserted to the database through running the query, and the screen will be changed to the login screen.
+
+### Hashing Password
+According to success criteria #1, the client wants the password to be hashed. This is to ensure that the user is the only one who knows the password and that the developers would not be able to get the user’s password simply from looking at the database. We use a helper for hashing from a library called “passlib” which has a class called “CryptContext”.
+
+```.py
+from passlib.context import CryptContext #cyptographic algorithm
+pwd_config = CryptContext(schemes = ["pbkdf2_sha256"],
+                         default = "pbkdf2_sha256",
+                         pbkdf2_sha256__default_rounds=30000
+                         )
+def encypt_password(user_password):
+   #this function receives plain text password from the user and returns the hash salted
+   return pwd_config.encrypt(user_password)
+
+def check_password(user_password, hashed): #this is to check that the password entered is the same one as the hash
+   return pwd_config.verify(user_password, hashed)
+```
+
+**Figure 25** is the python file called “secure_password” which imports a class “CryptContext” from the library “passlib”. It is a cryptographic algorithm which helps with hashing. There are two functions in this file: “encrypt_password” and “check_password”. The “encrypt_password” function receives the input password and converts it to a hash. The “check_password” function, on the other hand, receives the input password and the hashed password, then checks if the two match.
+
+### Login System
+
+After the account is created through the “try_register” method, the user can login to the application with their registered email and password. 
+```.py
+def try_login(self): #method to allow users to login
+   email_entered = self.ids.email_in.text #email text field
+   passwd_entered = self.ids.passwd_in.text #password text field
+   db = database_worker(namedb="login_database.db") #connect to the database
+   query = f"SELECT * from main.users where email = '{email_entered}'" #select in the database the email that matches
+   result = db.search(query = query) #search the query
+   db.close()
+```
+***Figure 26*** The figure above shows how the entered email is being searched in the database. The program receives the email and password input from the text field and saves it in the “email_entered” and “passwd_entered” variables. The program then runs a query which selects all from the “users” table in the database where the email matches the email entered.
+
+```.py
+if len(result)==1: # if the data matches
+   id, email, hashed, uname = result[0] #means that id = result[0][0], email = result[0][1],...
+   if check_password(hashed=hashed, user_password=passwd_entered):
+       print("Login successful")
+       self.parent.current = "HomeScreen" #change screen to homescreen
+       HomeScreen.user_id = id #id of user that logged in
+   else:
+       self.ids.passwd_in.error = True #if the login is right but password is wrong show error
+       print("Password don't match")
+else:
+   self.ids.email_in.error = True #show error
+   self.ids.passwd_in.error = True
+   print("Login incorrect")
+```
+**Figure 27** The figure shows the code when the email matches with the data in the database. It then checks if the password matches with the hash in the database through the “check_password” function. If both the email and the password matches, the screen will then change to the home screen. If the email does not match, the application will also show an email error. If the email is correct, but the password is not, it will also show an error message in the password field. The user will not be able to enter any other screens until both the email and the password matches.
+
+### Save Item Method
+In order to fulfill success criteria number 5 “the application allows the user to add and remove items”, I have created a method to receive input from the user through text fields and checkboxes and added them to the database. Moreover, the application also allows the user to add information of the item, the category, the color, the location, and the brand which fulfills success criteria 4.
+
+```.py
+def try_save_item(self): #method to save item
+   item = self.ids.item.text #text field for item name
+   category = self.selected_category #check box for category name
+   color = self.ids.color.text #text field for color
+   location = self.ids.location.text #text field for location
+   brand = self.ids.brand.text #text field for brand
+
+   if item=="" or category=="" or color=="" or location=="" or brand =="": #if the fields are blank
+       dialog = MDDialog(title="Not enough information",
+                         text=f"Please fill in information") #pop up screen
+       dialog.open() #show dialog
+   else:
+       db = database_worker(namedb="login_database.db") #connect to databse
+       query = f"INSERT into closet (user_id, item, category, color, location, brand) values ('{HomeScreen.user_id}','{item}','{category}','{color}','{location}','{brand}')"
+       db.run_save(query) #run query to insert info of item
+       db.close()
+```
+**Figure 28** shows the method where the information is received from the application saved in different variables as strings. There is an if statement to check that all the information is added. Then the information is saved to the “closet” table in the database.
+
+### Delete Item Method
+In order to fulfill success criteria 5, the application needs to be able to delete an item from the closet. I have created a function to delete the item from the database table.
+```.py
+def save(self): #delete row from table
+   checked_rows = self.data_table.get_row_checks()
+   print(checked_rows)
+   # delete
+   for r in checked_rows:
+       id = r[0] #user id matches
+       print(id)
+       query = f"DELETE from closet where id={id}" #delete where id is the row that is checked
+       print(query)
+       db = database_worker("login_database.db")
+       db.run_save(query)
+   db.close()
+   self.update()
+```
+**Figure 29** This is the method that deletes the checked row from the table. From this method, the program uses a for loop to get the user id of the row, and delete the row from the closet where id matches.
+
+### Category Filter
+
+According to success criteria 3, the client want the closet to be organized in categories. Therefore, I have created a method where a table only shows item data from the same category that is chosen.
+
+```.py
+def update(self, in_category="%"): #select all from the selected category
+   # read database and update table
+   db = database_worker("login_database.db")
+   query = f"SELECT * from closet where category like '{in_category}' and user_id={HomeScreen.user_id}" #show table where the category is the selcted one and belongs to one user id
+   data = db.search(query)
+   db.close()
+   self.data_table.update_row_data(None, data)  # data put in table
+```
+**Figure 30** The code shows that the query selects the items from the closet where the category matches the category that is selected. 
+
+```.py
+def showall(self): #show the entire closet table
+   db = database_worker("login_database.db")
+   query = f"SELECT * from closet where user_id={HomeScreen.user_id}" #all from closet table where user id is the one that is registered
+   data = db.search(query)
+   db.close()
+   self.data_table.update_row_data(None, data) #put data in table
+```
+***Figure 31*** Apart from viewing the items through filtered categories, the users also have the option to view the items in full view. Every item that falls under the user’s account id will be shown in the table.
+
+## Connect to Database
+According to success criteria 2, the client wants information to be stored in a database. Therefore, a class called “database_worker” is used to set up the database through SQLite3.
+```.py
+class database_worker: #method to setup the database
+   def __init__(self,namedb:str):
+       self.connection = sqlite3.connect(namedb)
+       self.cursor = self.connection.cursor()
+```
+**Figure 32** the class “database_worker” consists of methods where this is the initializer and two attributes are created which are “self.connection” and “self.cursor”. The connection attribute connects the database to the python file, and the cursor attribute establishes a cursor to the club members when they execute and run kivy files.
+
+### Create Database Table
+
+The database contains two data tables which is the “users” table and the “closet” table. The “users” table is used to store registration information and the “closet” table is used to store item information. 
+
+```.py
+def create_tables(self): #method to create the tables in the database
+   query = f"""CREATE TABLE if not exists users(
+       id INTEGER PRIMARY KEY,
+       email text NOT NULL unique,
+       password text NOT NULL,
+       username text NOT NULL)""" #table for users table which stores user information
+
+   query2=f"""           
+           CREATE TABLE if not exists closet(
+           id INTEGER PRIMARY KEY,
+           user_id INTEGER,
+           item text,
+           category  text,
+           color text,
+           location text,
+           brand text)""" #table for the closet which stores information of the items
+   self.run_save(query) #run the query
+   self.run_save(query2)
+```
+**Figure 33** To create a table, a query is run. The query would state the different columns in the two tables. When the program runs, it is in default to create a new table unless the table does not exist. 
 
 
 # Criteria D-Functionality
