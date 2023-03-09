@@ -269,6 +269,128 @@ As the last success criteria says that the application has a simple interface, t
 ```
 **Figure 15** shows the welcome screen which has an image as a background, a card on top, and text saying “Welcome to Zelan’s Zazzy Closet” within the card.
 
+**MDLabel**
+As the name says, MDLabel is the text function of the kivy language where the developer can adjust the size of the text, the style of the text, the message of the text, and its alignment.
+```.py
+MDLabel:
+   size_hint: 1,.05
+   font_style: "H2"
+   text: "Registration"
+   halign: "center"
+```
+**Figure16** The MDLabel widget has the settings of a size of taking up full space in the horizontal side, and 0.05 in the vertical side. The font style “H2” means header style 2, the text message is Registration and the horizontal alignment is placed at the center.
+
+**MDRaisedButton**
+To operate the application, I have used buttons to allow users to click on and navigate them to certain actions such as going to another page, or submitting information.
+
+```.py
+MDRaisedButton:
+   size_hint: .4,.2
+   pos_hint: {"center_x":.5, "center_y":.5}
+   text: "Explore Closet"
+   md_bg_color: "C893E8"
+   on_press: root.parent.current = "LoginScreen"
+```
+**Figure 17** According to the figure, MDRaisedButton is used to change the screen when it is pressed. The settings of the button says that the size takes up 0.4 of the horizontal, and 0.2 of the vertical. The position is at the middle as it is .5 of center x and y. There is a text on the button saying “Explore Closet”. The color of the button is the hex color code “C903E8”. When the user presses the button, the screen will change to the LoginScreen.
+
+**Input through MDTextField**
+In the application, users may need to input information to the program such as username, password, or information of the items. MDTextField widget is used as a field to receive texts from the users. 
+
+```.py
+MDTextField:
+   id: email
+   hint_text: "enter email"
+   icon_left: "email"
+   pos_hint: {"center_x":.5}
+   size_hint: .8, .1
+   helper_text_mode: "on_error"
+   helper_text: "Please enter an actual email"
+```
+**Figure 18** shows the text field for entering email in the registration screen.  The id of the widget is called “email”. The field will also have a text on it to inform the user on what to input by using “hint_text” as it says “enter username”. There is an email icon next to the text field by using icon_left.  The position and the size can also be adjusted with “pos_hint” and “size_hint”. When there is an error in from the user’s input, the program will also show an error message saying “Please enter an actual email” through “helper_text’.
+
+**Organizing the pages with MDBoxLayout***
+To make the interface organized, I used an organizing tool called “MDBoxLayout” which is an invisible box that can contain widgets within it. The widgets will be organized based within the MDBoxLayout. 
+```.py
+MDBoxLayout:
+   size_hint: 1,.1
+   spacing: dp(10)
+   padding: dp(10)
+
+   MDRaisedButton:
+       id: login
+       text: "Back"
+       md_bg_color: "#93D3E8" #blue
+       on_press: root.parent.current = "LoginScreen"
+       size_hint: .5,1
+
+
+   MDRaisedButton:
+       text: "Signup"
+       md_bg_color: "#E893B1" #pink
+       on_press: root.try_register()
+       size_hint: .5,1
+
+```
+**Figure 19** shows the code for a Box Layout that has an organizing adjustment of spacing and padding with 10 density pixels. The box contains 2 widgets which are both buttons (MDRaisedButton). The two buttons will have the spacing and padding based on the settings underneath the MDBoxLayout.
+
+**Checkbox using MDCheckbox**
+According to success criteria #3 “The application provides a visual function to see items being classified in categories: jewelry, top, bottom, shoes”. I used checkboxes to limit the user’s input in categories of the item by allowing them to choose between the 4 categories with checkboxes. 
+
+```.py
+MDBoxLayout:
+   MDCheckbox:
+       id: tops
+       group: 'group1' #this group is so that all the checkboxes are linked and only one can be selected
+       size_hint: None, None
+       size: dp(48), dp(48)
+       active: True
+       on_active: root.checkbox_click(self, self.active, "Tops")
+       pos_hint: {"center_y":.5}
+   MDLabel:
+       text: 'Tops'
+       pos_hint: {"center_y":.5}
+       font_size:30
+
+MDBoxLayout:
+   MDCheckbox:
+       id: bottoms
+       group: 'group1'
+       size_hint: None, None
+       size: dp(48), dp(48)
+       on_active: root.checkbox_click(self, self.active, "Bottoms")
+       pos_hint: {"center_y":.5}
+   MDLabel:
+       text: 'Bottoms'
+       font_size:25
+       pos_hint: {"center_y":.5}
+
+MDBoxLayout:
+   MDCheckbox:
+       id: shoes
+       group: 'group1'
+       size_hint: None, None
+       size: dp(48), dp(48)
+       on_active: root.checkbox_click(self, self.active, "Shoes")
+       pos_hint: {"center_y":.5}
+   MDLabel:
+       text: 'Shoes'
+       pos_hint: {"center_y":.5}
+
+MDBoxLayout:
+   MDCheckbox:
+       id: jewelry
+       group: 'group1'
+       size_hint: None, None
+       size: dp(48), dp(48)
+       on_active: root.checkbox_click(self, self.active, "Jewelry")
+       pos_hint: {"center_y":.5}
+   MDLabel:
+       text: 'Jewelry'
+       pos_hint: {"center_y":.5}
+       font_size:25
+```
+**Figure 20** shows the code in kivy language of the 4 checkboxes that are created to allow the users to choose the category of the item. Each checkboxes has its own id to connect with the Python file. They all fit in the same group, “group1”, so all the checkboxes are linked and only one can be selected. The “on_active” allows the checkbox to be clicked and the information will be sent to the Python code as a string.
+
 
 
 # Criteria D-Functionality
