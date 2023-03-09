@@ -607,6 +607,8 @@ def create_tables(self): #method to create the tables in the database
 
 # Criteria D-Functionality
 
+Link to video showing the functionality of the application and the code: https://youtu.be/gkmd2xpO1rk
+
 # Citation
 [1] “Passlib.context - Cryptcontext Hash Manager¶.” Passlib.context - CryptContext Hash Manager - Passlib v1.7.4 Documentation, https://passlib.readthedocs.io/en/stable/lib/passlib.context.html. 
 [2] “Welcome to KIVYMD's Documentation!#.” KivyMD 1.1.1 Documentation, https://kivymd.readthedocs.io/en/1.1.1/. 
@@ -623,3 +625,664 @@ def create_tables(self): #method to create the tables in the database
 [8] “Dialog.” Dialog - KivyMD 1.1.1 Documentation, https://kivymd.readthedocs.io/en/1.1.1/components/dialog/index.html. 
 
 [9] SQLite Documentation, https://www.sqlite.org/docs.html. 
+
+# Whole Code
+## Python
+```.py
+from kivymd.app import MDApp #app builder
+from kivymd.uix.datatables import MDDataTable #table in the app
+from kivymd.uix.screen import MDScreen #different screens in the app
+from kivymd.uix.dialog import MDDialog #pop up screen
+from secure_password import encypt_password, check_password #hash password
+import sqlite3 #connect to database
+
+class database_worker: #method to setup the database
+    def __init__(self,namedb:str):
+        self.connection = sqlite3.connect(namedb)
+        self.cursor = self.connection.cursor()
+
+    def create_tables(self): #method to create the tables in the database
+        query = f"""CREATE TABLE if not exists users(
+            id INTEGER PRIMARY KEY,
+            email text NOT NULL unique,
+            password text NOT NULL,
+            username text NOT NULL)""" #table for users table which stores user information
+
+        query2=f"""            
+                CREATE TABLE if not exists closet(
+                id INTEGER PRIMARY KEY,
+                user_id INTEGER,
+                item text, 
+                category  text,
+                color text,
+                location text,
+                brand text)""" #table for the closet which stores information of the items
+        self.run_save(query) #run the query
+        self.run_save(query2)
+
+    def run_save(self,query:str): #method to run the query
+        self.cursor.execute(query)
+        self.connection.commit()
+
+    def close(self): #method to close the database
+        self.connection.close()
+
+    def insert(self, email, password, username): #method to insert values to the users table
+        query = f"INSERT into users VALUES ('{email}', '{password}', '{username}')"
+        self.run_save(query)
+
+    def insert_clothes(self, category, color, location, brand): #methods to insert info of clothing item to the closet table
+        query = f"INSERT into closet VALUES ('{category}','{color}','{location}','{brand}')"
+        self.run_save(query)
+
+    def test_login(self,email,passwd): #find email and password that matches
+        query = f"SELECT * FROM users WHERE email = '{email}' AND password = '{passwd}'"
+        result = self.cursor.execute(query).fetchone()
+        return result
+
+    def search(self, query):
+        result = self.cursor.execute(query).fetchall()
+        return result #search in the database
+
+class WelcomeScreen(MDScreen): #first landing screen
+    pass
+
+class LoginScreen(MDScreen): #login page
+    def try_login(self): #method to allow users to login
+        email_entered = self.ids.email_in.text #email text field
+        passwd_entered = self.ids.passwd_in.text #password text field
+        db = database_worker(namedb="login_database.db") #connect to the database
+        query = f"SELECT * from main.users where email = '{email_entered}'" #select in the database the email that matches
+        result = db.search(query = query) #search the query
+        db.close()
+        if len(result)==1: # if the data matches
+            id, email, hashed, uname = result[0] #means that id = result[0][0], email = result[0][1],...
+            if check_password(hashed=hashed, user_password=passwd_entered):
+                print("Login successful")
+                self.parent.current = "HomeScreen" #change screen to homescreen
+                HomeScreen.user_id = id #id of user that logged in
+            else:
+                self.ids.passwd_in.error = True #if the login is right but password is wrong show error
+                print("Password don't match")
+        else:
+            self.ids.email_in.error = True #show error
+            self.ids.passwd_in.error = True
+            print("Login incorrect")
+
+class RegistrationScreen(MDScreen): #registration screen
+    def try_register(self): #registration method
+        user = self.ids.username.text #user text field
+        email = self.ids.email.text #email text field
+        password = self.ids.password.text #password text field
+        password_check = self.ids.password_check.text #password confirmation text field
+        if "@" not in email: #checks that there's an @ in the email so it is an actual email
+            self.ids.email.error = True #show error
+        if password != password_check or len(password) < 7: # password entered does not match and have less than 7 characters
+            self.ids.password_check.error = True #show error
+            self.ids.password.error = True
+            self.ids.password_check.md_bg_color = "red"
+        else:  # password match
+            db = database_worker("login_database.db") #connect to the database
+            hash = encypt_password(password) #turn password to hash
+            query = f"INSERT into users (email, password, username) values('{email}','{hash}','{user}')" # insert info into the table users
+            db.run_save(query)
+            db.close()
+            print("Registration completed")
+            self.parent.current = "LoginScreen" #change to login screen
+
+class HomeScreen(MDScreen): #home screen
+    user_id=None #use as self.user_id
+    pass
+
+class NewItemScreen(MDScreen):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.selected_category =None #selected category for the check box
+
+    def try_save_item(self): #method to save item
+        item = self.ids.item.text #text field for item name
+        category = self.selected_category #check box for category name
+        color = self.ids.color.text #text field for color
+        location = self.ids.location.text #text field for location
+        brand = self.ids.brand.text #text field for brand
+
+        if item=="" or category=="" or color=="" or location=="" or brand =="": #if the fields are blank
+            dialog = MDDialog(title="Not enough information",
+                              text=f"Please fill in information") #pop up screen
+            dialog.open() #show dialog
+        else:
+            db = database_worker(namedb="login_database.db") #connect to databse
+            query = f"INSERT into closet (user_id, item, category, color, location, brand) values ('{HomeScreen.user_id}','{item}','{category}','{color}','{location}','{brand}')"
+            db.run_save(query) #run query to insert info of item
+            db.close()
+            print("Item saved successfully")
+            dialog = MDDialog(title="Item added successfully!",
+                              text=f"Your item is now added to your closet :)") #show confirmation with pop up screen
+            dialog.open()
+
+    def checkbox_click(self, checkbox, value, category): #method for the check box
+        if value:  # if the check is true
+            self.selected_category = category #variable to save category
+            print(f"{category} is selected,checkbox:{checkbox},value:{value}")
+
+class ClosetScreen(MDScreen):
+    data_table = None
+
+    def on_pre_enter(self, *args): #create table
+        # b4 the screen is created the code is run
+        self.data_table = MDDataTable(
+            size_hint=(.8, .5),
+            pos_hint={"center_x": .5, "center_y": .5},
+            use_pagination=True,
+            check=True,
+            # title of the columns
+            column_data=[("id", 40),
+                         ("user_id", 30),
+                         ("item", 40),
+                         ("category", 30),
+                         ("color", 30),
+                         ("location",40),
+                         ("brand",40),
+                         ]
+        ) #info of the table
+        self.data_table.bind(on_row_press=self.row_pressed)  # check the row method name change so its more easy to understand,
+        self.data_table.bind(on_check_press=self.check_pressed) #check the check
+        self.add_widget(self.data_table)  # add table to the GUI
+        self.update() #update table
+
+    def row_pressed(self, table, row):
+        print("a row was pressed", row)
+
+    def check_pressed(self, table, current_row):
+        print("a check mark was pressed", current_row)
+
+
+    def save(self): #delete row from table
+        checked_rows = self.data_table.get_row_checks()
+        print(checked_rows)
+        # delete
+        for r in checked_rows:
+            id = r[0] #user id matches
+            print(id)
+            query = f"DELETE from closet where id={id}" #delete where id is the row that is checked
+            print(query)
+            db = database_worker("login_database.db")
+            db.run_save(query)
+        db.close()
+        self.update()
+
+    def update(self, in_category="%"): #select all from the selected category
+        # read database and update table
+        db = database_worker("login_database.db")
+        query = f"SELECT * from closet where category like '{in_category}' and user_id={HomeScreen.user_id}" #show table where the category is the selcted one and belongs to one user id
+        data = db.search(query)
+        db.close()
+        self.data_table.update_row_data(None, data)  # data put in table
+
+    def showall(self): #show the entire closet table
+        db = database_worker("login_database.db")
+        query = f"SELECT * from closet where user_id={HomeScreen.user_id}" #all from closet table where user id is the one that is registered
+        data = db.search(query)
+        db.close()
+        self.data_table.update_row_data(None, data) #put data in table
+
+    def delete(self): #delete item
+        checks=self.data_table.get_row_checks()
+        for ch in checks:
+            id = ch[0] #select the first column which is item id
+            db = database_worker("login_database.db") #connect to database
+            query = f"DELETE from closet where id = {id}" #delete row from closet for the selected row
+            db.run_save(query)
+            db.close()
+            print("deleted item")
+
+class example_login(MDApp): #app builder
+    def build(self):
+        return
+
+db = database_worker(namedb="login_database.db")
+db.create_tables()
+db.close()
+test = example_login()
+test.run()
+```
+## Python File for Password Cryptography
+```.py
+from passlib.context import CryptContext #cyptographic algorithm
+pwd_config = CryptContext(schemes = ["pbkdf2_sha256"],
+                          default = "pbkdf2_sha256",
+                          pbkdf2_sha256__default_rounds=30000
+                          )
+def encypt_password(user_password):
+    #this function receives plain text password from the user and returns the hash salted
+    return pwd_config.encrypt(user_password)
+
+def check_password(user_password, hashed): #this is to check that the password entered is the same one as the hash
+    return pwd_config.verify(user_password, hashed)
+```
+
+## Kivy File
+```.kv
+ScreenManager:
+
+
+    WelcomeScreen:
+        name: "WelcomeScreen"
+
+    LoginScreen:
+        name: "LoginScreen"
+
+    RegistrationScreen:
+        name: "RegistrationScreen"
+
+    HomeScreen:
+        name: "HomeScreen"
+
+    ClosetScreen:
+        name: "ClosetScreen"
+
+    NewItemScreen:
+        name: "NewItemScreen"
+
+<WelcomeScreen>:
+    FitImage:
+        source: "bg.jpeg"
+
+    MDCard:
+        size_hint: .6,.8
+        pos_hint: {"center_x":.5, "center_y":.5}
+        orientation: "vertical"
+        spacing: dp(10)
+        padding: dp(10)
+
+
+        MDLabel:
+            font_style: "H3"
+            text: "Welcome to Zelan's Zazzy Closet"
+            halign: "center"
+
+        FitImage:
+            source: "closet.jpg"
+            size_hint: 1,1
+
+        MDRaisedButton:
+            size_hint: .4,.2
+            pos_hint: {"center_x":.5, "center_y":.5}
+            text: "Explore Closet"
+            md_bg_color: "C893E8"
+            on_press: root.parent.current = "LoginScreen"
+
+<LoginScreen>:
+    FitImage:
+        source: "bg.jpeg"
+
+
+    MDCard:
+        size_hint: .6,.8
+        pos_hint: {"center_x":.5, "center_y":.5}
+        orientation: "vertical"
+        spacing: dp(10)
+        padding: dp(10)
+
+        MDLabel:
+            size_hint: 1,.05
+            font_style: "H2"
+            text: "Login"
+            halign: "center"
+
+        MDTextField:
+            id: email_in
+            hint_text: "enter email"
+            pos_hint: {"center_x":.5}
+            size_hint: .8, .1
+
+
+        MDTextField:
+            id: passwd_in
+            hint_text: "enter password"
+            password: True
+            size_hint: .8, .1
+            pos_hint: {"center_x":.5}
+
+        MDBoxLayout:
+            size_hint: 1,.05
+            spacing: dp(10)
+            padding: dp(10)
+
+            MDRaisedButton:
+                id: login
+                text: "Login"
+                md_bg_color: "93D3E8" #blue
+                on_press: root.try_login()
+                size_hint: .5,1
+
+
+            MDRaisedButton:
+                text: "Registration"
+                md_bg_color: "E893B1" #redish pink
+                on_press: root.parent.current = "RegistrationScreen"
+                size_hint: .5,1
+
+<RegistrationScreen>:
+    FitImage:
+        source: "bg.jpeg"
+    MDCard:
+        size_hint: .6,.8
+        pos_hint: {"center_x":.5, "center_y":.5}
+        orientation: "vertical"
+        spacing: dp(10)
+        padding: dp(10)
+
+        MDLabel:
+            size_hint: 1,.05
+            font_style: "H2"
+            text: "Registration"
+            halign: "center"
+
+        MDTextField:
+            id: username
+            hint_text: "enter username"
+            pos_hint: {"center_x":.5}
+            size_hint: .8, .1
+
+        MDTextField:
+            id: email
+            hint_text: "enter email"
+            icon_left: "email"
+            pos_hint: {"center_x":.5}
+            size_hint: .8, .1
+            helper_text_mode: "on_error"
+            helper_text: "Please enter an actual email"
+
+        MDTextField:
+            id: password
+            hint_text: "enter password"
+            password: True
+            icon_left: "key"
+
+            #size_hint: .8
+            pos_hint: {"center_x":.5}
+            size_hint: .8, .1
+
+        MDTextField:
+            id: password_check
+            hint_text: "retype password"
+            password: True
+            icon_left: "key"
+            #size_hint_x: .8
+            pos_hint: {"center_x":.5}
+            size_hint: .8, .1
+            helper_text_mode: "on_error"
+            helper_text: "Please re-enter the same password that has at least 6 characters"
+
+        MDBoxLayout:
+            size_hint: 1,.1
+            spacing: dp(10)
+            padding: dp(10)
+
+            MDRaisedButton:
+                id: login
+                text: "Back"
+                md_bg_color: "#93D3E8" #blue
+                on_press: root.parent.current = "LoginScreen"
+                size_hint: .5,1
+
+
+            MDRaisedButton:
+                text: "Signup"
+                md_bg_color: "#E893B1" #pink
+                on_press: root.try_register()
+                size_hint: .5,1
+<HomeScreen>:
+    FitImage:
+        source: "bg.jpeg"
+
+    MDBoxLayout:
+        size_hint: 1,1
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: dp(10)
+
+        MDCard:
+            size_hint: .8,.2
+            md_bg_color: "FFFFFF"
+            pos_hint: {"center_x":.5}
+            MDLabel:
+                text: "Home"
+                font_style: "H3"
+                pos_hint: {"center_x":.5}
+                halign: "center"
+
+        MDBoxLayout:
+            pos_hint: {"center_x":.5}
+            size_hint: 1, .8
+            orientation: 'vertical'
+            spacing: dp(10)
+            padding: dp(10)
+
+
+            MDRaisedButton:
+                text: "Seek Closet"
+                text_color: "000000"
+                font_size: 45
+                md_bg_color: "FFFFFF" #blue
+                on_press: root.parent.current = "ClosetScreen"
+                size_hint: .4,.2
+                pos_hint: {"center_x":.5}
+
+            MDRaisedButton:
+                text: "Add Item"
+                text_color: "000000"
+                font_size: 45
+                md_bg_color: "FFFFFF" #blue
+                on_press: root.parent.current = "NewItemScreen"
+                size_hint: .4,.2
+                pos_hint: {"center_x":.5}
+
+            MDRaisedButton:
+                text: "Logout"
+                text_color: "000000"
+                font_size: 45
+                md_bg_color: "FFFFFF" #blue
+                on_press: root.parent.current = "LoginScreen"
+                size_hint: .4,.2
+                pos_hint: {"center_x":.5}
+
+
+<NewItemScreen>:
+    FitImage:
+        source: "bg.jpeg"
+    MDCard:
+        size_hint: .8,.9
+        pos_hint: {"center_x":.5, "center_y":.5}
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: dp(10)
+
+        MDBoxLayout:
+            size_hint:1,.2
+            orientation:"horizontal"
+            pos_hint: {"center_y":0.5}
+
+            MDLabel:
+                font_style: "H3"
+                text: "Add Item"
+                halign: "center"
+                valign: "center"
+                pos_hint: {"center_y":0.8}
+
+        MDTextField:
+            id: item
+            hint_text: "Enter item name"
+            size_hint: .8, .2
+            pos_hint: {"center_x":.5}
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint: .8,.1
+            #md_bg_color: "8BED5C"
+            pos_hint: {"center_x":.5}
+
+            MDBoxLayout:
+                pos_hint: {"center_y":.5}
+                orientation: "vertical"
+                size_hint: 1,1
+                MDLabel:
+                    font_size : 30
+                    font_name: "Arial"
+                    text: "Category"
+                    pos_hint: {"center_y":.5}
+                    halign:"center"
+
+            MDBoxLayout:
+                MDCheckbox:
+                    id: tops
+                    group: 'group1' #this group is so that all the checkboxes are linked and only one can be selected
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    active: True
+                    on_active: root.checkbox_click(self, self.active, "Tops")
+                    pos_hint: {"center_y":.5}
+                MDLabel:
+                    text: 'Tops'
+                    pos_hint: {"center_y":.5}
+                    font_size:30
+
+            MDBoxLayout:
+                MDCheckbox:
+                    id: bottoms
+                    group: 'group1'
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    on_active: root.checkbox_click(self, self.active, "Bottoms")
+                    pos_hint: {"center_y":.5}
+                MDLabel:
+                    text: 'Bottoms'
+                    font_size:25
+                    pos_hint: {"center_y":.5}
+
+            MDBoxLayout:
+                MDCheckbox:
+                    id: shoes
+                    group: 'group1'
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    on_active: root.checkbox_click(self, self.active, "Shoes")
+                    pos_hint: {"center_y":.5}
+                MDLabel:
+                    text: 'Shoes'
+                    pos_hint: {"center_y":.5}
+
+            MDBoxLayout:
+                MDCheckbox:
+                    id: jewelry
+                    group: 'group1'
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    on_active: root.checkbox_click(self, self.active, "Jewelry")
+                    pos_hint: {"center_y":.5}
+                MDLabel:
+                    text: 'Jewelry'
+                    pos_hint: {"center_y":.5}
+                    font_size:25
+        MDTextField:
+            id: color
+            hint_text: "Enter the color of the item"
+            size_hint: .8, .2
+            pos_hint: {"center_x":.5}
+
+        MDTextField:
+            id: location
+            hint_text: "Enter the location of the item"
+            size_hint: .8, .2
+            pos_hint: {"center_x":.5}
+
+        MDTextField:
+            id: brand
+            hint_text: "Enter brand"
+            size_hint: .8, .2
+            pos_hint: {"center_x":.5}
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint: 1,.2
+            spacing: dp(10)
+            padding: dp(10)
+            #md_bg_color: "96D87F"
+
+            MDRaisedButton:
+                text: "Back"
+                md_bg_color: "6BD1E0" #blue
+                on_press: root.parent.current = "HomeScreen"
+                #size_hint: .2,.1
+
+            MDLabel:
+                id: SaveItemConfirmation
+                font_style: "H5"
+                halign: "center"
+
+
+            MDRaisedButton:
+                text: "Insert"
+                md_bg_color: "907FD8" #purple
+                on_press: root.try_save_item()
+
+
+<ClosetScreen>:
+    FitImage:
+        source: "bg.jpeg"
+
+    MDBoxLayout:
+        orientation: "horizontal"
+        size_hint: 1, .2
+        spacing: dp(10)
+        padding: dp(10)
+
+        MDRaisedButton:
+            text: "Back"
+            md_bg_color: "6BD1E0" #blue
+            on_press: root.parent.current = "HomeScreen"
+
+        MDLabel:
+            text: ""
+
+        MDRaisedButton:
+            text: "All items"
+            md_bg_color: "907FD8" #purple
+            on_press:
+                root.showall()
+
+
+        MDRaisedButton:
+            text: "Tops"
+            md_bg_color: "907FD8" #purple
+            on_press:
+                root.update("Tops")
+
+        MDRaisedButton:
+            text: "Bottoms"
+            md_bg_color: "907FD8" #purple
+            on_press:
+                root.update("Bottoms")
+
+        MDRaisedButton:
+            text: "Shoes"
+            md_bg_color: "907FD8" #purple
+            on_press:
+                root.update("Shoes")
+
+        MDRaisedButton:
+            text: "Jewelry"
+            md_bg_color: "907FD8" #purple
+            on_press:
+                root.update("Jewelry")
+
+        MDLabel:
+            text: ""
+
+        MDRaisedButton:
+            text: "Delete"
+            md_bg_color: "FF5D5D" #coral red
+            on_press:
+                root.delete()
+```
