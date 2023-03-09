@@ -1,6 +1,6 @@
 # Unit3_Project
 
-![closet](https://user-images.githubusercontent.com/112055062/224108707-9f3484b9-2cad-4175-8ef2-8c9c31bf2030.jpg)
+![closet](https://user-images.githubusercontent.com/112055062/224108917-639fe8c0-c19c-424b-a105-7ec9ef1752ab.jpeg)
 
 # Table of Content
 1. [Criteria A](#criteria-a-planning)
