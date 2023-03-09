@@ -208,7 +208,66 @@ class ClosetScreen(MDScreen):
        self.add_widget(self.data_table)  # add table to the GUI
        self.update() #update table
 ```
-**Figure 12** The data table in this application is shown in the Seek Closet Screen which is in the class ClosetScreen inherited from the MDScreen class. The table in this class is created using a method called “on_pre_enter”, which creates the table showing the items in the closet. The settings of the table is added which are, for example, the size of the table, setting for page options, check marks, and information of the columns (id, user_id, category, color, location, and brand) 
+**Figure 12** The data table in this application is shown in the Seek Closet Screen which is in the class ClosetScreen inherited from the MDScreen class. The table in this class is created using a method called “on_pre_enter”, which creates the table showing the items in the closet. The settings of the table are added which are, for example, the size of the table, setting for page options, check marks, and information of the columns (id, user_id, category, color, location, and brand). This table fulfills success criteria number 4 where the application shows the brand of the item, the color, and the location of the item.
+
+**Pop up screens using MDDialog**
+```.py
+if item=="" or category=="" or color=="" or location=="" or brand =="": #if the fields are blank
+   dialog = MDDialog(title="Not enough information",
+                     text=f"Please fill in information") #pop up screen
+   dialog.open() #show dialog
+```
+**Figure 13** MDDialog is used to show a pop up screen which can have messages for the user. In the application, these pop up screens are used as a confirmation when the user entered information in text fields such as the item information form, and confirmation for inserting item to the database. Figure 13 shows the use of MDDialog when one of the fields for the information of the item is not filled. A pop up screen will show up saying not enough information and asking the user to refill the information. 
+
+**Kivy File**
+Apart from the python file, to develop the user interface, we also need a Kivy file which is written in the kivy language. The file is organized in layers with different elements. The file starts with listing the application screens and its layers.
+
+```.py
+ScreenManager:
+
+
+   WelcomeScreen:
+       name: "WelcomeScreen"
+
+   LoginScreen:
+       name: "LoginScreen"
+
+   RegistrationScreen:
+       name: "RegistrationScreen"
+
+   HomeScreen:
+       name: "HomeScreen"
+
+   ClosetScreen:
+       name: "ClosetScreen"
+
+   NewItemScreen:
+       name: "NewItemScreen"
+```
+**Figure 14** shows the screens in the application which is organized in layers. Therefore, the first screen that will show in the application when the user enters the application is the “WelcomeScreen”. The other screens could be accessed by the functions that are added to the application.
+
+**Background and boxes with FitImage and MDCard**
+As the last success criteria says that the application has a simple interface, the program is organized with backgrounds and layers. The aesthetics of the program comes from the background which is a picture of a gradient graphic design. This image was added with the technique called FitImage which allows the user to add a picture file. In figure 15, the image file name is called “bg.jpeg”. However, to make a simple interface, the user needs to be able to read the information on the application clearly, so we use MDCard as a white base background. MDCard is a box with round edges used to contain content, which in this case, an MDLabel text is within the card.
+
+```.py
+<WelcomeScreen>:
+   FitImage:
+       source: "bg.jpeg"
+
+   MDCard:
+       size_hint: .6,.8
+       pos_hint: {"center_x":.5, "center_y":.5}
+       orientation: "vertical"
+       spacing: dp(10)
+       padding: dp(10)
+
+
+       MDLabel:
+           font_style: "H3"
+           text: "Welcome to Zelan's Zazzy Closet"
+           halign: "center"
+```
+**Figure 15** shows the welcome screen which has an image as a background, a card on top, and text saying “Welcome to Zelan’s Zazzy Closet” within the card.
 
 
 
