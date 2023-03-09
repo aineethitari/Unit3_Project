@@ -180,6 +180,36 @@ class example_login(MDApp): #app builder
 
 **Figure 11** The screens in the application are developed by classes inheriting from the MDScreen class from the kivymd library. Each screen has its own class in the python file. The main screens in this application are WelcomeScreen, LoginScreen, RegistrationScreen, HomeScreen, NewItemScreen, and ClosetScreen.
 
+**Visual Data Table in the Application**
+
+```.py
+class ClosetScreen(MDScreen):
+   data_table = None
+
+   def on_pre_enter(self, *args): #create table
+       # b4 the screen is created the code is run
+       self.data_table = MDDataTable(
+           size_hint=(.8, .5),
+           pos_hint={"center_x": .5, "center_y": .5},
+           use_pagination=True,
+           check=True,
+           # title of the columns
+           column_data=[("id", 40),
+                        ("user_id", 30),
+                        ("item", 40),
+                        ("category", 30),
+                        ("color", 30),
+                        ("location",40),
+                        ("brand",40),
+                        ]
+       ) #info of the table
+       self.data_table.bind(on_row_press=self.row_pressed)  # check the row method name change so its more easy to understand,
+       self.data_table.bind(on_check_press=self.check_pressed) #check the check
+       self.add_widget(self.data_table)  # add table to the GUI
+       self.update() #update table
+```
+**Figure 12** The data table in this application is shown in the Seek Closet Screen which is in the class ClosetScreen inherited from the MDScreen class. The table in this class is created using a method called “on_pre_enter”, which creates the table showing the items in the closet. The settings of the table is added which are, for example, the size of the table, setting for page options, check marks, and information of the columns (id, user_id, category, color, location, and brand) 
+
 
 
 # Criteria D-Functionality
