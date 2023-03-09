@@ -135,9 +135,9 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |31| List all techniques used| Techniques that are used to develop this application are listed clearly| 15 min| 9 March 2023| Criteria C|
 |32| Write about the the development of the project in GUI| Explain how the interface is developed| 2 hr| 9 March 2023| Criteria C|
 |33| Write about the development of the functions| Show how the main functions are developed from the code| 2 hr | 9 March 2023| Criteria C|
-|34| Write about the development of the the database processing| Explain how the codes and query work to connect to the database using sqlite3| 1 hr| 9 March 2023|
+|34| Write about the development of the the database processing| Explain how the codes and query work to connect to the database using sqlite3| 1 hr| 9 March 2023|Criteria D|
 |35| Record video of the functionality of the application| Explain and show every section of the application| 30 min| 9 March | 2023| Criteria D|
-|36| Show the whole code| Kivy code, python code pasted| 10 min| 9 March 2023|  |
+|36| Show the whole code| Kivy code, python code pasted| 10 min| 9 March 2023| Whole Code |
 
 **Figure 8** The table above is the record of task for the development of the project since the beginning to the very end which is the documentation process. The information in the table includes the number of the task, the planned action, the planned outcome, the time taken to complete the task, the date completed, and the criteria(Criteria A:Planning, Criteria B: Solution Overview, Criteria C: Development, and Criteria D: Functionality)
 
