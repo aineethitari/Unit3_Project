@@ -95,7 +95,7 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |Check the add item system for error| Unit test| 1.Leave some fields blank 2.Press the insert button| The program returns a pop up screen asking the users to fill out the blanked fields.|
 |Python code review| Code review| 1.Check if the code is easy for other developers to continue 2.Code has comments to explain each parts that need explanation 3.Variable names matches what the code does 3.There are no unnecessary lines| Code is commented clearly with organized structure. The code is easy to follow through.|
 
-
+**Figure 7** Test plan of the program which consists of a description of the test, the type of the test(unit test, integration test, or code review), inputs for the test, and the expected outputs for the successful test. 
 
 ## Record of Tasks
 | Task No | Planned Action| Planned Outcome| Time estimate | Target completion date | Criterion |
@@ -132,6 +132,7 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |30| Review whole code| Code has comments, appropriate variables,...| 20 min| 8 March 2023| Criteria B|
 |31| List all techniques used| Techniques that are used to develop this application are listed clearly| 15 min| 9 March 2023| Criteria C|
 
+**Figure 8** The table above is the record of task for the development of the project since the beginning to the very end which is the documentation process. The information in the table includes the number of the task, the planned action, the planned outcome, the time taken to complete the task, the date completed, and the criteria(Criteria A:Planning, Criteria B: Solution Overview, Criteria C: Development, and Criteria D: Functionality)
 
 # Criteria C-Development
 
@@ -144,6 +145,40 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 - If Statements
 - For loops
 - Variables
+
+## Overall Development of the Project
+In the development of this project, there are 2 main parts which are the Graphical User Interface through KivyMD; the functions, which are developed using Python programming language; and the database, which is processed with SQLite3.
+
+## Using KivyMD for the Graphical User Interface (GUI)
+For the development of the GUI, KivyMD Library which contains material design widgets to organize the aesthetics of the interface. In this project there are many classes from the kivymd library that are imported to develop the components of the application: MDApp, MDScreen, MDDatatable and MDDialog. There are two parts in the development of the GUI, the first part is developed in the Python file, and the second part is developed in the kivy file. The python file may also contain other methods that are used for the functionality of the application as well. 
+
+**Setting up Python file**
+
+```.py
+from kivymd.app import MDApp #app builder
+from kivymd.uix.datatables import MDDataTable #table in the app
+from kivymd.uix.screen import MDScreen #different screens in the app
+from kivymd.uix.dialog import MDDialog #pop up screen
+from secure_password import encypt_password, check_password #hash password
+import sqlite3 #connect to database
+
+```
+**Figure 9** The code starts with setting up the libraries and classes that are used to develop this program. To create the application, the program needs an app builder which is the “MDApp” application class from the kivymd library. From the kivymd library, MDDataTable, which is used to create the table shown in the application is also imported, MDScreen is used to create different screens in the application, MDDialog is used to show a pop up screen, secure password is a library that I created for password encryption, and sqlite3 is imported to process the database.
+
+**Building the App**
+
+```.py
+class example_login(MDApp): #app builder
+   def build(self):
+       return
+```
+**Figure 10** This is the class for building the application which is inherited from the MDApp class from the kivymd library. The class name is the name of the kivy file “example_login”. The class includes a method called “build” which is used to build the application and connect the python file to the kivy file.
+
+**Setting up the Screens**
+
+<img width="308" alt="screens" src="https://user-images.githubusercontent.com/112055062/223947719-52c6fd0b-bdd2-4a2d-ac67-a30bf5d5aed6.png">
+
+**Figure 11** The screens in the application are developed by classes inheriting from the MDScreen class from the kivymd library. Each screen has its own class in the python file. The main screens in this application are WelcomeScreen, LoginScreen, RegistrationScreen, HomeScreen, NewItemScreen, and ClosetScreen.
 
 
 
