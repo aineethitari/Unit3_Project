@@ -128,10 +128,24 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 |26| Write about the flow diagram for deleting item| Detailed description of how the flow diagram work so the client understands the method| 15 min| 7 March 23| Criteria B|
 |27| Create the test plan table| test plan table with the following columns: description, type, inputs, and outputs| 5 min| 7 March 2023| Criteria B|
 |28| Write the test plan| detail test plan | 15 min| 8 March 2023| Criteria B|
-|29| Review whole code| Code has comments, appropriate variables,...| 20 min| 8 March 2023| Criteria B|
+|29| Add comments to the code | Commented code with explanation to every confusing points| 30 min| 8 March 2023| Criteria B|
+|30| Review whole code| Code has comments, appropriate variables,...| 20 min| 8 March 2023| Criteria B|
+|31| List all techniques used| Techniques that are used to develop this application are listed clearly| 15 min| 9 March 2023| Criteria C|
 
 
 # Criteria C-Development
+
+## List of techniques used
+- Object-oriented programming (OOP)
+- KivyMD Library
+- Relational Databases
+- SQLite, Object Relational Mapping
+- Passlib Password Hashing Library
+- If Statements
+- For loops
+- Variables
+
+
 
 # Criteria D-Functionality
 # Citation
