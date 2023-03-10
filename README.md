@@ -13,7 +13,7 @@
 
 5. [Citation](#citation)
 
-6. [Code](#code)
+6. [Whole Code](#whole-code)
 
 # Criteria A-Planning
 ## Problem Definition
@@ -638,6 +638,7 @@ Link to video showing the functionality of the application and the code: https:/
 [10] OpenAI. ChatGPT. chat.openai.com/. Accessed 2 Mar. 2023.
 
 # Whole Code
+
 ## Python
 ```.py
 from kivymd.app import MDApp #app builder
