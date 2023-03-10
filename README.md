@@ -154,7 +154,7 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 - Variables
 
 ### Overall Development of the Project
-In the development of this project, there are 2 main parts which are the Graphical User Interface through KivyMD; the functions, which are developed using Python programming language; and the database, which is processed with SQLite3.
+In the development of this project, there are 3 main parts which are the Graphical User Interface through KivyMD; the functions, which are developed using Python programming language; and the database, which is processed with SQLite3.
 
 ### Using KivyMD for the Graphical User Interface (GUI)
 For the development of the GUI, KivyMD Library which contains material design widgets to organize the aesthetics of the interface. In this project there are many classes from the kivymd library that are imported to develop the components of the application: MDApp, MDScreen, MDDatatable and MDDialog. There are two parts in the development of the GUI, the first part is developed in the Python file, and the second part is developed in the kivy file. The python file may also contain other methods that are used for the functionality of the application as well. 
@@ -634,6 +634,8 @@ Link to video showing the functionality of the application and the code: https:/
 [8] “Dialog.” Dialog - KivyMD 1.1.1 Documentation, https://kivymd.readthedocs.io/en/1.1.1/components/dialog/index.html. 
 
 [9] SQLite Documentation, https://www.sqlite.org/docs.html. 
+
+[10] OpenAI. ChatGPT. chat.openai.com/. Accessed 2 Mar. 2023.
 
 # Whole Code
 ## Python
