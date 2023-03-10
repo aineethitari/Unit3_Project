@@ -153,6 +153,102 @@ Lastly, I have chosen to use sqlite3 for the database of this project because it
 - For loops
 - Variables
 
+## Computational Thinking
+
+There are four main steps in computational thinking: decomposition, pattern recognition, abstraction and algorithm design.
+
+### Decomposition
+
+In computational thinking, decomposition is the process of breaking down a problem into smaller parts. This is so that it is more manageable when tackling a problem. One of the functions that I have to develop in the program is the function where a table of the items in the closet is shown on the application interface. This function could be too complex if it is done as a whole. Therefore, I have broken it down into two parts: creating the table, and updating it.
+
+```.py
+def on_pre_enter(self, *args): #create table
+   # b4 the screen is created the code is run
+   self.data_table = MDDataTable(
+       size_hint=(.8, .5),
+       pos_hint={"center_x": .5, "center_y": .5},
+       use_pagination=True,
+       check=True,
+       # title of the columns
+       column_data=[("id", 40),
+                    ("user_id", 30),
+                    ("item", 40),
+                    ("category", 30),
+                    ("color", 30),
+                    ("location",40),
+                    ("brand",40),
+                    ]
+   ) #info of the table
+   self.data_table.bind(on_row_press=self.row_pressed)  # check the row method name change so its more easy to understand,
+   self.data_table.bind(on_check_press=self.check_pressed) #check the check
+   self.add_widget(self.data_table)  # add table to the GUI
+   self.update() #update table
+``` 
+**Figure 9** shows the first part of the function which is the method “on_pre_enter” which creates the table of the closet. 
+
+```.py
+def update(self, in_category="%"): #select all from the selected category
+   # read database and update table
+   db = database_worker("login_database.db")
+   query = f"SELECT * from closet where category like '{in_category}' and user_id={HomeScreen.user_id}" #show table where the category is the selcted one and belongs to one user id
+   data = db.search(query)
+   db.close()
+   self.data_table.update_row_data(None, data)  # data put in table
+```
+**Figure 10** shows the second part of the function where the table is updated and the information that was given on the previous step is updated.
+
+### Pattern Recognition
+Pattern recognition in computational thinking refers to the process of identifying the connections between the different parts within the problem. 
+In the application, there is a function where the users can add new items to the closet by filling out a textfield about the information of the item. I designed a policy where every text field has to be filled, so there is no missing information. To do that, I used an if statement where if a text field is an empty string in any of the fields, the program will return a message asking the user to fill it in. 
+```.py
+if item=="" #if the fields are blank
+   dialog = MDDialog(title="Not enough information",
+                     text=f"Please fill in information") #pop up screen
+   dialog.open() #show dialog
+```
+**Figure 11** If statement that I used. The problem with this is that I have to repeat every single text field for the information. Therefore, I recognized the pattern where this if statements goes the same for every textfield asking for the information of the item.
+
+### Abstraction 
+
+Abstraction is the process to indicate what needs to be done in order to solve the problem. 
+In order to make use of the pattern that was recognized in the previous step. Instead of repeating the if statement for every text field, I combined it into one.
+
+```.py
+if item=="" or category=="" or color=="" or location=="" or brand =="": #if the fields are blank
+   dialog = MDDialog(title="Not enough information",
+                     text=f"Please fill in information") #pop up screen
+   dialog.open() #show dialog
+```
+**Figure 12** All the information are combined into one if statement.
+
+### Algorithmic Thinking
+
+Algorithmic thinking is the final part of the problem solving process. The process is to define a step-by-step solution to the problem. In the program that I have developed, there is algorithmic thinking in the main functions of the program as every step is followed by each other to solve one big problem, or to create one full function.
+
+```.py
+def try_register(self): #registration method
+   user = self.ids.username.text #user text field
+   email = self.ids.email.text #email text field
+   password = self.ids.password.text #password text field
+   password_check = self.ids.password_check.text #password confirmation text field
+   if "@" not in email: #checks that there's an @ in the email so it is an actual email
+       self.ids.email.error = True #show error
+   if password != password_check or len(password) < 7: # password entered does not match and have less than 7 characters
+       self.ids.password_check.error = True #show error
+       self.ids.password.error = True
+       self.ids.password_check.md_bg_color = "red"
+   else:  # password match
+       db = database_worker("login_database.db") #connect to the database
+       hash = encypt_password(password) #turn password to hash
+       query = f"INSERT into users (email, password, username) values('{email}','{hash}','{user}')" # insert info into the table users
+       db.run_save(query)
+       db.close()
+       print("Registration completed")
+       self.parent.current = "LoginScreen" #change to login screen
+``` 
+**Figure 13** In the try_register method which is used for the registration system, each line of the code goes step by step. It starts with defining the variables which store the information from the text fields. Then followed by the validation system, where there is an email policy and password policy. Once the email and password are checked the program would either continue or show an error. 
+
+
 ### Overall Development of the Project
 In the development of this project, there are 3 main parts which are the Graphical User Interface through KivyMD; the functions, which are developed using Python programming language; and the database, which is processed with SQLite3.
 
@@ -170,7 +266,7 @@ from secure_password import encypt_password, check_password #hash password
 import sqlite3 #connect to database
 
 ```
-**Figure 9** The code starts with setting up the libraries and classes that are used to develop this program. To create the application, the program needs an app builder which is the “MDApp” application class from the kivymd library. From the kivymd library, MDDataTable, which is used to create the table shown in the application is also imported, MDScreen is used to create different screens in the application, MDDialog is used to show a pop up screen, secure password is a library that I created for password encryption, and sqlite3 is imported to process the database.
+**Figure 14** The code starts with setting up the libraries and classes that are used to develop this program. To create the application, the program needs an app builder which is the “MDApp” application class from the kivymd library. From the kivymd library, MDDataTable, which is used to create the table shown in the application is also imported, MDScreen is used to create different screens in the application, MDDialog is used to show a pop up screen, secure password is a library that I created for password encryption, and sqlite3 is imported to process the database.
 
 ### Building the App with MDApp
 
@@ -179,13 +275,13 @@ class example_login(MDApp): #app builder
    def build(self):
        return
 ```
-**Figure 10** This is the class for building the application which is inherited from the MDApp class from the kivymd library. The class name is the name of the kivy file “example_login”. The class includes a method called “build” which is used to build the application and connect the python file to the kivy file.
+**Figure 15** This is the class for building the application which is inherited from the MDApp class from the kivymd library. The class name is the name of the kivy file “example_login”. The class includes a method called “build” which is used to build the application and connect the python file to the kivy file.
 
 ### Setting up the Screens with MDScreen
 
 <img width="308" alt="screens" src="https://user-images.githubusercontent.com/112055062/223947719-52c6fd0b-bdd2-4a2d-ac67-a30bf5d5aed6.png">
 
-**Figure 11** The screens in the application are developed by classes inheriting from the MDScreen class from the kivymd library. Each screen has its own class in the python file. The main screens in this application are WelcomeScreen, LoginScreen, RegistrationScreen, HomeScreen, NewItemScreen, and ClosetScreen.
+**Figure 16** The screens in the application are developed by classes inheriting from the MDScreen class from the kivymd library. Each screen has its own class in the python file. The main screens in this application are WelcomeScreen, LoginScreen, RegistrationScreen, HomeScreen, NewItemScreen, and ClosetScreen.
 
 ### Visual Data Table in the Application
 
@@ -215,7 +311,7 @@ class ClosetScreen(MDScreen):
        self.add_widget(self.data_table)  # add table to the GUI
        self.update() #update table
 ```
-**Figure 12** The data table in this application is shown in the Seek Closet Screen which is in the class ClosetScreen inherited from the MDScreen class. The table in this class is created using a method called “on_pre_enter”, which creates the table showing the items in the closet. The settings of the table are added which are, for example, the size of the table, setting for page options, check marks, and information of the columns (id, user_id, category, color, location, and brand). This table fulfills success criteria number 4 where the application shows the brand of the item, the color, and the location of the item.
+**Figure 17** The data table in this application is shown in the Seek Closet Screen which is in the class ClosetScreen inherited from the MDScreen class. The table in this class is created using a method called “on_pre_enter”, which creates the table showing the items in the closet. The settings of the table are added which are, for example, the size of the table, setting for page options, check marks, and information of the columns (id, user_id, category, color, location, and brand). This table fulfills success criteria number 4 where the application shows the brand of the item, the color, and the location of the item.
 
 ### Pop up screens using MDDialog
 ```.py
@@ -224,7 +320,7 @@ if item=="" or category=="" or color=="" or location=="" or brand =="": #if the 
                      text=f"Please fill in information") #pop up screen
    dialog.open() #show dialog
 ```
-**Figure 13** MDDialog is used to show a pop up screen which can have messages for the user. In the application, these pop up screens are used as a confirmation when the user entered information in text fields such as the item information form, and confirmation for inserting item to the database. Figure 13 shows the use of MDDialog when one of the fields for the information of the item is not filled. A pop up screen will show up saying not enough information and asking the user to refill the information. 
+**Figure 18** MDDialog is used to show a pop up screen which can have messages for the user. In the application, these pop up screens are used as a confirmation when the user entered information in text fields such as the item information form, and confirmation for inserting item to the database. Figure 13 shows the use of MDDialog when one of the fields for the information of the item is not filled. A pop up screen will show up saying not enough information and asking the user to refill the information. 
 
 ### Kivy File
 
@@ -252,7 +348,7 @@ ScreenManager:
    NewItemScreen:
        name: "NewItemScreen"
 ```
-**Figure 14** shows the screens in the application which is organized in layers. Therefore, the first screen that will show in the application when the user enters the application is the “WelcomeScreen”. The other screens could be accessed by the functions that are added to the application.
+**Figure 19** shows the screens in the application which is organized in layers. Therefore, the first screen that will show in the application when the user enters the application is the “WelcomeScreen”. The other screens could be accessed by the functions that are added to the application.
 
 ### Background and boxes with FitImage and MDCard
 As the last success criteria says that the application has a simple interface, the program is organized with backgrounds and layers. The aesthetics of the program comes from the background which is a picture of a gradient graphic design. This image was added with the technique called FitImage which allows the user to add a picture file. In figure 15, the image file name is called “bg.jpeg”. However, to make a simple interface, the user needs to be able to read the information on the application clearly, so we use MDCard as a white base background. MDCard is a box with round edges used to contain content, which in this case, an MDLabel text is within the card.
@@ -275,7 +371,7 @@ As the last success criteria says that the application has a simple interface, t
            text: "Welcome to Zelan's Zazzy Closet"
            halign: "center"
 ```
-**Figure 15** shows the welcome screen which has an image as a background, a card on top, and text saying “Welcome to Zelan’s Zazzy Closet” within the card.
+**Figure 20** shows the welcome screen which has an image as a background, a card on top, and text saying “Welcome to Zelan’s Zazzy Closet” within the card.
 
 ### MDLabel
 As the name says, MDLabel is the text function of the kivy language where the developer can adjust the size of the text, the style of the text, the message of the text, and its alignment.
@@ -286,7 +382,7 @@ MDLabel:
    text: "Registration"
    halign: "center"
 ```
-**Figure16** The MDLabel widget has the settings of a size of taking up full space in the horizontal side, and 0.05 in the vertical side. The font style “H2” means header style 2, the text message is Registration and the horizontal alignment is placed at the center.
+**Figure21** The MDLabel widget has the settings of a size of taking up full space in the horizontal side, and 0.05 in the vertical side. The font style “H2” means header style 2, the text message is Registration and the horizontal alignment is placed at the center.
 
 ### MDRaisedButton
 To operate the application, I have used buttons to allow users to click on and navigate them to certain actions such as going to another page, or submitting information.
@@ -299,7 +395,7 @@ MDRaisedButton:
    md_bg_color: "C893E8"
    on_press: root.parent.current = "LoginScreen"
 ```
-**Figure 17** According to the figure, MDRaisedButton is used to change the screen when it is pressed. The settings of the button says that the size takes up 0.4 of the horizontal, and 0.2 of the vertical. The position is at the middle as it is .5 of center x and y. There is a text on the button saying “Explore Closet”. The color of the button is the hex color code “C903E8”. When the user presses the button, the screen will change to the LoginScreen.
+**Figure 22** According to the figure, MDRaisedButton is used to change the screen when it is pressed. The settings of the button says that the size takes up 0.4 of the horizontal, and 0.2 of the vertical. The position is at the middle as it is .5 of center x and y. There is a text on the button saying “Explore Closet”. The color of the button is the hex color code “C903E8”. When the user presses the button, the screen will change to the LoginScreen.
 
 ### Input through MDTextField
 In the application, users may need to input information to the program such as username, password, or information of the items. MDTextField widget is used as a field to receive texts from the users. 
@@ -314,7 +410,7 @@ MDTextField:
    helper_text_mode: "on_error"
    helper_text: "Please enter an actual email"
 ```
-**Figure 18** shows the text field for entering email in the registration screen.  The id of the widget is called “email”. The field will also have a text on it to inform the user on what to input by using “hint_text” as it says “enter username”. There is an email icon next to the text field by using icon_left.  The position and the size can also be adjusted with “pos_hint” and “size_hint”. When there is an error in from the user’s input, the program will also show an error message saying “Please enter an actual email” through “helper_text’.
+**Figure 23** shows the text field for entering email in the registration screen.  The id of the widget is called “email”. The field will also have a text on it to inform the user on what to input by using “hint_text” as it says “enter username”. There is an email icon next to the text field by using icon_left.  The position and the size can also be adjusted with “pos_hint” and “size_hint”. When there is an error in from the user’s input, the program will also show an error message saying “Please enter an actual email” through “helper_text’.
 
 ### Organizing the pages with MDBoxLayout
 To make the interface organized, I used an organizing tool called “MDBoxLayout” which is an invisible box that can contain widgets within it. The widgets will be organized based within the MDBoxLayout. 
@@ -339,7 +435,7 @@ MDBoxLayout:
        size_hint: .5,1
 
 ```
-**Figure 19** shows the code for a Box Layout that has an organizing adjustment of spacing and padding with 10 density pixels. The box contains 2 widgets which are both buttons (MDRaisedButton). The two buttons will have the spacing and padding based on the settings underneath the MDBoxLayout.
+**Figure 24** shows the code for a Box Layout that has an organizing adjustment of spacing and padding with 10 density pixels. The box contains 2 widgets which are both buttons (MDRaisedButton). The two buttons will have the spacing and padding based on the settings underneath the MDBoxLayout.
 
 ### Checkbox using MDCheckbox
 According to success criteria #3 “The application provides a visual function to see items being classified in categories: jewelry, top, bottom, shoes”. I used checkboxes to limit the user’s input in categories of the item by allowing them to choose between the 4 categories with checkboxes. 
@@ -397,7 +493,7 @@ MDBoxLayout:
        pos_hint: {"center_y":.5}
        font_size:25
 ```
-**Figure 20** shows the code in kivy language of the 4 checkboxes that are created to allow the users to choose the category of the item. Each checkboxes has its own id to connect with the Python file. They all fit in the same group, “group1”, so all the checkboxes are linked and only one can be selected. The “on_active” allows the checkbox to be clicked and the information will be sent to the Python code as a string.
+**Figure 25** shows the code in kivy language of the 4 checkboxes that are created to allow the users to choose the category of the item. Each checkboxes has its own id to connect with the Python file. They all fit in the same group, “group1”, so all the checkboxes are linked and only one can be selected. The “on_active” allows the checkbox to be clicked and the information will be sent to the Python code as a string.
 
 ## Developing the functions through Python 
 
@@ -426,7 +522,7 @@ def try_register(self): #registration method
        self.parent.current = "LoginScreen" #change to login screen
 ```
 
-**Figure 21** shows the Python code of the registration method where the users are asked to input a new username, email, password, and a password confirmation.
+**Figure 26** shows the Python code of the registration method where the users are asked to input a new username, email, password, and a password confirmation.
 
 ### Email Policy
 
@@ -435,7 +531,7 @@ if "@" not in email: #checks that there's an @ in the email so it is an actual e
    self.ids.email.error = True #show error
 ```
 
-**Figure 22** There is a validation system for email to make sure that the user input an actual email address by requiring “@” to be in the input. If the “@” sign is not in the email input, the program will return an error message. 
+**Figure 27** There is a validation system for email to make sure that the user input an actual email address by requiring “@” to be in the input. If the “@” sign is not in the email input, the program will return an error message. 
 
 ### Password Policy
 ```.py
@@ -444,7 +540,7 @@ if password != password_check or len(password) < 7: # password entered does not 
    self.ids.password.error = True
    self.ids.password_check.md_bg_color = "red"
 ```
-**Figure 23** There is a password policy that the user needs to enter a password that has at least 7 characters and the passwords input in the “password” textfield and the “password_check” textfield need to match to make sure that the user input the right password. This is done so by using an if statement where the passwords do not match and the characters does not reach 7 and the program will show an error message in the text field.
+**Figure 28** There is a password policy that the user needs to enter a password that has at least 7 characters and the passwords input in the “password” textfield and the “password_check” textfield need to match to make sure that the user input the right password. This is done so by using an if statement where the passwords do not match and the characters does not reach 7 and the program will show an error message in the text field.
 
 ```.py
 else:  # password match
@@ -456,7 +552,7 @@ else:  # password match
    print("Registration completed")
    self.parent.current = "LoginScreen" #change to login screen
 ```
-**Figure24** This shows what happens if the password entered passes the password policy. The program will connect to the database and transform the password into a hash with the function “encrypt_password” (see Figure 25). The user registration information is then inserted to the database through running the query, and the screen will be changed to the login screen.
+**Figure29** This shows what happens if the password entered passes the password policy. The program will connect to the database and transform the password into a hash with the function “encrypt_password” (see Figure 25). The user registration information is then inserted to the database through running the query, and the screen will be changed to the login screen.
 
 ### Hashing Password
 According to success criteria #1, the client wants the password to be hashed. This is to ensure that the user is the only one who knows the password and that the developers would not be able to get the user’s password simply from looking at the database. We use a helper for hashing from a library called “passlib” which has a class called “CryptContext”.
@@ -475,7 +571,7 @@ def check_password(user_password, hashed): #this is to check that the password e
    return pwd_config.verify(user_password, hashed)
 ```
 
-**Figure 25** is the python file called “secure_password” which imports a class “CryptContext” from the library “passlib”. It is a cryptographic algorithm which helps with hashing. There are two functions in this file: “encrypt_password” and “check_password”. The “encrypt_password” function receives the input password and converts it to a hash. The “check_password” function, on the other hand, receives the input password and the hashed password, then checks if the two match.
+**Figure 30** is the python file called “secure_password” which imports a class “CryptContext” from the library “passlib”. It is a cryptographic algorithm which helps with hashing. There are two functions in this file: “encrypt_password” and “check_password”. The “encrypt_password” function receives the input password and converts it to a hash. The “check_password” function, on the other hand, receives the input password and the hashed password, then checks if the two match.
 
 ### Login System
 
@@ -489,7 +585,7 @@ def try_login(self): #method to allow users to login
    result = db.search(query = query) #search the query
    db.close()
 ```
-***Figure 26*** The figure above shows how the entered email is being searched in the database. The program receives the email and password input from the text field and saves it in the “email_entered” and “passwd_entered” variables. The program then runs a query which selects all from the “users” table in the database where the email matches the email entered.
+***Figure 31*** The figure above shows how the entered email is being searched in the database. The program receives the email and password input from the text field and saves it in the “email_entered” and “passwd_entered” variables. The program then runs a query which selects all from the “users” table in the database where the email matches the email entered.
 
 ```.py
 if len(result)==1: # if the data matches
@@ -506,7 +602,7 @@ else:
    self.ids.passwd_in.error = True
    print("Login incorrect")
 ```
-**Figure 27** The figure shows the code when the email matches with the data in the database. It then checks if the password matches with the hash in the database through the “check_password” function. If both the email and the password matches, the screen will then change to the home screen. If the email does not match, the application will also show an email error. If the email is correct, but the password is not, it will also show an error message in the password field. The user will not be able to enter any other screens until both the email and the password matches.
+**Figure 32** The figure shows the code when the email matches with the data in the database. It then checks if the password matches with the hash in the database through the “check_password” function. If both the email and the password matches, the screen will then change to the home screen. If the email does not match, the application will also show an email error. If the email is correct, but the password is not, it will also show an error message in the password field. The user will not be able to enter any other screens until both the email and the password matches.
 
 ### Save Item Method
 In order to fulfill success criteria number 5 “the application allows the user to add and remove items”, I have created a method to receive input from the user through text fields and checkboxes and added them to the database. Moreover, the application also allows the user to add information of the item, the category, the color, the location, and the brand which fulfills success criteria 4.
@@ -529,7 +625,7 @@ def try_save_item(self): #method to save item
        db.run_save(query) #run query to insert info of item
        db.close()
 ```
-**Figure 28** shows the method where the information is received from the application saved in different variables as strings. There is an if statement to check that all the information is added. Then the information is saved to the “closet” table in the database.
+**Figure 33** shows the method where the information is received from the application saved in different variables as strings. There is an if statement to check that all the information is added. Then the information is saved to the “closet” table in the database.
 
 ### Delete Item Method
 In order to fulfill success criteria 5, the application needs to be able to delete an item from the closet. I have created a function to delete the item from the database table.
@@ -548,7 +644,7 @@ def save(self): #delete row from table
    db.close()
    self.update()
 ```
-**Figure 29** This is the method that deletes the checked row from the table. From this method, the program uses a for loop to get the user id of the row, and delete the row from the closet where id matches.
+**Figure 34** This is the method that deletes the checked row from the table. From this method, the program uses a for loop to get the user id of the row, and delete the row from the closet where id matches.
 
 ### Category Filter
 
@@ -563,7 +659,7 @@ def update(self, in_category="%"): #select all from the selected category
    db.close()
    self.data_table.update_row_data(None, data)  # data put in table
 ```
-**Figure 30** The code shows that the query selects the items from the closet where the category matches the category that is selected. 
+**Figure 35** The code shows that the query selects the items from the closet where the category matches the category that is selected. 
 
 ```.py
 def showall(self): #show the entire closet table
@@ -573,7 +669,7 @@ def showall(self): #show the entire closet table
    db.close()
    self.data_table.update_row_data(None, data) #put data in table
 ```
-***Figure 31*** Apart from viewing the items through filtered categories, the users also have the option to view the items in full view. Every item that falls under the user’s account id will be shown in the table.
+***Figure 36*** Apart from viewing the items through filtered categories, the users also have the option to view the items in full view. Every item that falls under the user’s account id will be shown in the table.
 
 ## Connect to Database
 According to success criteria 2, the client wants information to be stored in a database. Therefore, a class called “database_worker” is used to set up the database through SQLite3.
@@ -583,7 +679,7 @@ class database_worker: #method to setup the database
        self.connection = sqlite3.connect(namedb)
        self.cursor = self.connection.cursor()
 ```
-**Figure 32** the class “database_worker” consists of methods where this is the initializer and two attributes are created which are “self.connection” and “self.cursor”. The connection attribute connects the database to the python file, and the cursor attribute establishes a cursor to the club members when they execute and run kivy files.
+**Figure 37** the class “database_worker” consists of methods where this is the initializer and two attributes are created which are “self.connection” and “self.cursor”. The connection attribute connects the database to the python file, and the cursor attribute establishes a cursor to the club members when they execute and run kivy files.
 
 ### Create Database Table
 
@@ -609,7 +705,7 @@ def create_tables(self): #method to create the tables in the database
    self.run_save(query) #run the query
    self.run_save(query2)
 ```
-**Figure 33** To create a table, a query is run. The query would state the different columns in the two tables. When the program runs, it is in default to create a new table unless the table does not exist. 
+**Figure 38** To create a table, a query is run. The query would state the different columns in the two tables. When the program runs, it is in default to create a new table unless the table does not exist. 
 
 
 # Criteria D-Functionality
